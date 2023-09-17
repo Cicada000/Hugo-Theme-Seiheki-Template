@@ -1,0 +1,73 @@
+<!-- toc.html -->
+<!-- ignore empty links with + -->
+{{ $headers := findRE "<h[1-2].*?>(.|\n])+?</h[1-2]>" .Content }}
+<!-- at least one header to link to -->
+{{ if ge (len $headers) 1 }}
+{{ $h1_n := len (findRE "<h1(.|\n])+?</h1>" .Content) }}
+{{ $re := (cond (eq $h1_n 0) "<h2" "<h[1-2]") }}
+{{ $renum := (cond (eq $h1_n 0) "2" "[1-2]") }}
+<!--Scrollspy-->
+<div class="toc">
+    <div class="page-header"><strong>{{ .Title }}</strong></div>
+    <div id="page-scrollspy" class="toc-nav">
+        {{ range $headers }}
+        {{ $header := . }}
+            {{ range first 1 (findRE $re $header 1) }}
+                {{ range findRE $renum . 1 }}
+                {{ $next_heading := (cond (eq $h1_n 0) (sub (int .) 1 ) (int . ) ) }}
+                    {{ $anchorId := (replaceRE ".* id=\"(.*?)\".*" "$1" $header ) }}
+                    <!-- 如果有标题，则生成 <ul> 和 <li> -->
+                    {{ if $anchorId }}
+                    <ul class="nav">
+                        <li class="nav-item">
+                            <a class="nav-link text-left" href="#{{ $anchorId }}">
+                            {{ $header | plainify | htmlUnescape }}
+                            </a>
+                        </li>
+                    </ul>
+                    {{ end }}
+                {{ end }}
+            {{ end }}
+        {{ end }}
+    </div>
+</div>
+<!--Scrollspy-->
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    let toc = document.getElementById('page-scrollspy');
+    if (!toc) return;
+
+    let headers = document.querySelectorAll('h1, h2');
+    let tocLinks = toc.querySelectorAll('a');
+    let lastIntersecting = null;
+
+    headers.forEach(header => {
+        let observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    if (lastIntersecting) {
+                        let prevLink = toc.querySelector(`a[href="#${lastIntersecting.id}"]`);
+                        if (prevLink) {
+                            prevLink.classList.add('active');
+                        }
+                    }
+                    tocLinks.forEach(link => {
+                        link.classList.remove('active');
+                    });
+                    let activeLink = toc.querySelector(`a[href="#${entry.target.id}"]`);
+                    if (activeLink) {
+                        activeLink.classList.add('active');
+                    }
+                    lastIntersecting = entry.target;
+                }
+            });
+        }, {
+            rootMargin: "-40% 0px -60% 0px",
+            threshold: 0
+        });
+
+        observer.observe(header);
+    });
+});
+</script>
+{{ end }}

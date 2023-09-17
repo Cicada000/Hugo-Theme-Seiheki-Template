@@ -1,0 +1,19 @@
+<head>
+    {{ $styles := resources.Get "css/main.css" }}
+    <link rel="stylesheet" href="{{ $styles.RelPermalink }}">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+
+    <!-- Umami 统计数据 -->
+    {{ if .Site.Params.Umami.id }}
+        {{ if .Site.Params.Umami.webpanel }}
+            <script async src="https://{{ .Site.Params.umami.webpanel }}/script.js" data-website-id="{{ .Site.Params.umami.id }}"></script>
+        {{ else }}
+            <script async src="https://analytics.umami.is/script.js" data-website-id="{{ .Site.Params.umami.id }}"></script>
+        {{ end }}
+    {{ end }}
+
+</head>

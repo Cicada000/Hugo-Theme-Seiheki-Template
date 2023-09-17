@@ -1,0 +1,24 @@
+{{ define "main"}}
+    <body>
+        {{ range where .Site.RegularPages "Type" "post" }}
+            <div class="index-post">
+                    <a class="post-link" href="{{ .Permalink }}">{{ .Title }}</a>
+                    {{ if .Params.description }}
+                        <p>{{ .Params.description }}</p>
+                        {{ else }}
+                        <p>{{ .Summary | plainify | truncate 100 }}</p>
+                    {{ end }}
+                    <i class="ri-time-line"></i>
+                    {{ .Params.date.Format "2006.1.1" }}
+                    {{ if .Params.tags }}
+                        <i class="ri-hashtag"></i>
+                    {{ end }}
+                    {{ range .Params.tags }}
+                        <a class="tags" href="{{ "/tags/" | relLangURL }}{{ . | urlize }}">{{ . }}</a>
+                    {{ end }}
+                    <br>
+            </div>
+            <br>
+            {{ end }}
+        </body>
+{{end}}

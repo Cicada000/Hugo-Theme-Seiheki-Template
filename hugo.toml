@@ -1,0 +1,29 @@
+baseURL = 'http://example.org/'          # 网站域名
+languageCode = 'en-us'                   # 网页语言
+title = 'My New Hugo Site'               # 网站Title
+theme = 'north'
+
+[markup]
+  [markup.highlight]
+    codeFences = true
+    linenos = true
+    linenosStyle = "inline"
+  [markup.goldmark.renderer]
+    unsafe = true
+
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
+
+[taxonomies]
+  tag = "tags"
+  category = "categories"
+
+[Umami]                                  # Umami网站数据统计
+  webpanel = ""                          # 统计网站面板，空值默认为官网
+  id = ""                                # 网站的Website ID，空值不开启统计
+
+comments = true
+
+[params.Utterances]                      # 添加Utterances评论
+  repo = "Cicada000/Blog-Comments"       # 你的评论仓库
+  theme = ""                             # 你的Utterances主题

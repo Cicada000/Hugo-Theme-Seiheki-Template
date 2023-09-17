@@ -1,0 +1,23 @@
+{{ if .Site.Params.Utterances.repo }}
+    <script src="https://utteranc.es/client.js"
+            repo="{{ .Site.Params.Utterances.repo }}"
+            issue-term="pathname"
+            theme="{{ .Site.Params.Utterances.theme }}"
+            crossorigin="anonymous"
+            async>
+    </script>
+
+    <script>
+        document.getElementById("theme-toggle").addEventListener("click", () => {
+            const theme = document.body.className.includes("dark")
+                ? "github-light"
+                : "photon-dark";
+                const message = {
+                    type: "set-theme",
+                    theme: theme,
+                };
+                const utteranc = document.querySelector(".utterances-frame");
+                utteranc.contentWindow.postMessage(message, "https://utteranc.es");
+            });
+    </script>
+{{ end }}

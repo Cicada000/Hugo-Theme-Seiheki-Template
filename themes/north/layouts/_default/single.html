@@ -1,0 +1,22 @@
+{{ define "main"}}
+    <body>
+        <div id="post" class="post">
+            <article>
+                <header>
+                    <h1 class="post-title">{{ .Title }}</h1>
+                </header>
+                <i class="ri-time-line"></i>
+                    {{ .Params.date.Format "2006.1.1" }}
+                    {{ if .Params.tags }}
+                        <i class="ri-hashtag"></i>
+                    {{ end }}
+                    {{ range .Params.tags }}
+                        <a class="tags" href="{{ "/tags/" | relLangURL }}{{ . | urlize }}">{{ . }}</a>
+                {{ end }}
+                {{- partial "toc.html" . }}
+                {{.Content}}
+            </article>
+        </div>
+        {{- partial "comments.html" . }}
+    </body>
+{{ end }}
