@@ -9,7 +9,7 @@
                         <p>{{ .Summary | plainify | truncate 100 }}</p>
                     {{ end }}
                     <i class="ri-time-line"></i>
-                    {{ .Params.date.Format "2006.1.1" }}
+                    {{ dateFormat "2006.1.1" .Date }}
                     {{ if .Params.tags }}
                         <i class="ri-hashtag"></i>
                     {{ end }}
