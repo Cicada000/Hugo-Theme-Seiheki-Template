@@ -12,7 +12,7 @@ theme = 'north'
     unsafe = true
 
 [outputs]
-  home = ["HTML" , "JSON"]
+  home = ["HTML" , "RSS" , "JSON"]
 
 [taxonomies]
   tag = "tags"
