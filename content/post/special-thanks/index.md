@@ -39,11 +39,16 @@ categories = [
 [Nedifinita](https://blog.nedifinita.me/)
 
 ## TOC Template
+
 [AriesMe](https://www.ariesme.com/posts/2019/add_toc_for_hugo/)
 
 ## Color Reference
 
 [Cynosura](https://cynosura.one/)
+
+## RSS Template
+
+[WANG Chucheng](https://www.wangchucheng.com/zh/)
 
 ## Other
 
