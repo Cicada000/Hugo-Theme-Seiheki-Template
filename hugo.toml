@@ -1,6 +1,6 @@
-baseURL = 'https://hugo-theme-north-template.vercel.app/'               # 网站域名
-languageCode = 'en-us'                                                  # 网页语言
-title = 'Hugo Theme North Template'                                     # 网站Title
+baseURL = 'http://example.org/'          # 网站域名
+languageCode = 'en-us'                   # 网页语言
+title = 'My New Hugo Site'               # 网站Title
 theme = 'north'
 
 [markup]
