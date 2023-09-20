@@ -18,7 +18,7 @@ theme = 'north'
   tag = "tags"
   category = "categories"
 
-[Umami]                                                       # Umami网站数据统计
+[params.Umami]                                                       # Umami网站数据统计
   webpanel = ""                                               # 统计网站面板，空值默认为官网
   id = "84f6eb25-5dcd-4e2b-b500-37a6ac27f531"                 # 网站的Website ID，空值不开启统计
 

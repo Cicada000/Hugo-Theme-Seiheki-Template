@@ -11,8 +11,8 @@
     {{ if .Site.Params.Umami.id }}
         {{ if .Site.Params.Umami.webpanel }}
             <script async src="https://{{ .Site.Params.Umami.webpanel }}/script.js" data-website-id="{{ .Site.Params.Umami.id }}"></script>
-        {{ else }}
-            <script async src="https://analytics.Umami.is/script.js" data-website-id="{{ .Site.Params.Umami.id }}"></script>
+            {{ else }}
+                <script async src="https://analytics.umami.is/script.js" data-website-id="{{ .Site.Params.Umami.id }}"></script>
         {{ end }}
     {{ end }}
 

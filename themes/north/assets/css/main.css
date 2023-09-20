@@ -1,8 +1,8 @@
 html::-webkit-scrollbar { /* 隐藏滚动条 */
-    width: 0px; 
+    width: 0px;
 }
 
-/*网站颜色*/
+/*网站元素颜色*/
 
 :root {
     --body-background-color: #e3e6e4;
@@ -11,6 +11,8 @@ html::-webkit-scrollbar { /* 隐藏滚动条 */
     --link-color: #77969A;
     --link-color-hover: #268785;
     --code-block-background-color: #cccccc;
+    --tag-color: #999999;
+    --tag-background-hover: 
 }
 
 /*暗色模式*/
@@ -40,14 +42,21 @@ html::-webkit-scrollbar { /* 隐藏滚动条 */
 body {
     background-color: var(--body-background-color);
     font-family: "Noto Serif SC", sans-serif;
-    font-weight: 700;
     width: 60%;
-    max-width: 800px;
+    max-width: 1000px;
     margin: auto;
 
     --duration: 1s;
     --timing: ease-in-out;
     transition: background-color var(--duration);
+}
+
+/* 改善移动端浏览体验 */
+
+@media screen and (max-aspect-ratio: 0.7) {
+    body {
+        width: 85%;
+    }
 }
 
 /*标题样式*/
@@ -56,7 +65,7 @@ body {
     display: inline-block;
     width: auto;
     height: auto;
-    
+    font-weight: 700;
     font-size: 2rem;
     color: var(--site-title-color);
     transition: all 0.5s;
@@ -84,9 +93,16 @@ body {
 /*标签样式*/
 
 .tags {
+    font-weight: 500;
+    color: var(--tag-color);
     display: inline-block;
     width: auto;
     height: auto;
+}
+
+.up-time {
+    font-weight: 500;
+    color: var(--tag-color);
 }
 
 /*表格样式*/
@@ -135,6 +151,7 @@ th {
 
 a {
     color: var(--link-color);
+    font-weight: 700;
     text-decoration: none;
     transition: all 0.5s;
 }
@@ -145,7 +162,7 @@ a:hover {
 }
 
 .post-link {
-    font-size: 1.6rem;
+    font-size: 24px;
 }
 
 /*代码块样式*/
@@ -165,10 +182,15 @@ p > code {
 pre code , code {
     font-family: 'Fira Code', Consolas, Monaco, monospace;
     font-size: 14px;
+    font-weight: 700;
     line-height: 1.5;
     word-spacing: normal;
     word-break: normal;
     word-wrap: normal;
+}
+
+kbd {
+    font-weight: 700;
 }
 
 .highlight .linenos, .highlight .code {
@@ -191,6 +213,7 @@ pre code , code {
     right: 10px;
     width: 200px;
     padding: 10px;
+    line-height: 20px;
 }
 
 .toc h2 {
@@ -221,6 +244,7 @@ pre code , code {
 .toc a.active {
     color: #268785;
     font-size: medium;
+    font-weight: 700;
 }
 
 img {

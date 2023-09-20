@@ -8,10 +8,10 @@
                         {{ else }}
                         <p>{{ .Summary | plainify | truncate 100 }}</p>
                     {{ end }}
-                    <i class="ri-time-line"></i>
-                    {{ dateFormat "2006.1.1" .Date }}
+                    <i class="ri-time-line" style="color: var(--tag-color);"></i>
+                    <a class="up-time" href="{{ "/archives/" }}">{{ dateFormat "2006.1.1" .Date }}</a>
                     {{ if .Params.tags }}
-                        <i class="ri-hashtag"></i>
+                        <i class="ri-hashtag" style="color: var(--tag-color);"></i>
                     {{ end }}
                     {{ range .Params.tags }}
                         <a class="tags" href="{{ "/tags/" | relLangURL }}{{ . | urlize }}">{{ . }}</a>
