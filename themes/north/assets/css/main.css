@@ -12,7 +12,7 @@ html::-webkit-scrollbar { /* 隐藏滚动条 */
     --link-color-hover: #268785;
     --code-block-background-color: #cccccc;
     --tag-color: #999999;
-    --tag-background-hover: 
+    --tag-background-hover: #777777;
 }
 
 /*暗色模式*/
@@ -45,7 +45,7 @@ body {
     width: 60%;
     max-width: 1000px;
     margin: auto;
-
+    font-weight: 500;
     --duration: 1s;
     --timing: ease-in-out;
     transition: background-color var(--duration);
@@ -92,17 +92,25 @@ body {
 
 /*标签样式*/
 
-.tags {
+.tags , .up-time {
     font-weight: 500;
     color: var(--tag-color);
     display: inline-block;
     width: auto;
     height: auto;
+    padding: 1px 4px;
+    border-radius: 3px;
+    --duration: 0.5s;
+    --timing: ease-in-out;
+    transition: all var(--duration);
 }
 
-.up-time {
-    font-weight: 500;
-    color: var(--tag-color);
+.tags:hover {
+    background-color: var(--tag-background-hover);
+}
+
+.up-time:hover {
+    background-color: var(--tag-background-hover);
 }
 
 /*表格样式*/
@@ -248,5 +256,10 @@ kbd {
 }
 
 img {
-    width: 60%;
+    width: 50%;
+    max-width: 350px;
+    height: auto;
+    text-align: center;
+    display: block;
+    margin: 0 auto;
 }
