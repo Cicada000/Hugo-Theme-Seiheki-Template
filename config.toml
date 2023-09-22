@@ -14,6 +14,9 @@ theme = 'north'
 [outputs]
   home = ["HTML" , "RSS"]
 
+[permalinks]
+  page = "/:slug/"
+
 [taxonomies]
   tag = "tags"
   category = "categories"
