@@ -1,0 +1,25 @@
+<script>
+    fetch('/index.json')
+    .then(response => response.json())
+    .then(data => {
+        const options = {
+            keys: ['title', 'content'],
+            threshold: 0.3
+        };
+        const fuse = new Fuse(data, options);
+
+        document.getElementById('search-input').addEventListener('input', function() {
+            let results = fuse.search(this.value);
+            let searchResults = document.getElementById('search-results');
+            searchResults.innerHTML = '';
+            results.forEach(result => {
+                let item = document.createElement('li');
+                let link = document.createElement('a');
+                link.href = result.item.permalink;
+                link.textContent = result.item.title;
+                item.appendChild(link);
+                searchResults.appendChild(item);
+            });
+        });
+    });
+</script>
