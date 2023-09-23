@@ -1,0 +1,10 @@
+{{ define "main" }}
+<div class="tag-group">
+    <h1>文章标签</h1>
+    <ul>
+        {{ range .Site.Taxonomies.tags.ByCount }}
+        <li><a href="{{ `tags/` | relLangURL }}{{ .Name | urlize }}">{{ .Name }}</a> ({{ len .Pages }})</li>
+        {{ end }}
+    </ul>
+</div>
+{{ end }}

@@ -1,0 +1,10 @@
+{{ define "main" }}
+<div class="tag-details">
+    <h1>{{ .Title }} 标签下的文章</h1>
+    <ul>
+        {{ range .Data.Pages }}
+        <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+        {{ end }}
+    </ul>
+</div>
+{{ end }}
