@@ -4,7 +4,12 @@
     .then(data => {
         const options = {
             keys: ['title', 'content'],
-            threshold: 0.3
+            threshold: 0.4,
+            tokenize: true,
+            matchAllTokens: true,
+            includeMatches: true,
+            findAllMatches: true,
+            ignoreLocation: true
         };
         const fuse = new Fuse(data, options);
 
