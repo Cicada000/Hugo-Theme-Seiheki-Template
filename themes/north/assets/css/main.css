@@ -18,6 +18,7 @@ html::-webkit-scrollbar { /* 隐藏滚动条 */
     --table-td-border-color: #dbdbdb;
     --table-tr-odd-background-color: #efefee;
     --table-tr-even-background-color: #fafafc;
+    --mark-background-color: #ffff00;
 }
 
 /*暗色模式*/
@@ -33,6 +34,7 @@ html::-webkit-scrollbar { /* 隐藏滚动条 */
         --table-td-border-color: #242424;
         --table-tr-odd-background-color: #101011;
         --table-tr-even-background-color: #050503;
+        --mark-background-color: #b8b800;
     }
 
     img {
@@ -273,4 +275,8 @@ img {
     text-align: center;
     display: block;
     margin: 0 auto;
+}
+
+mark {
+    background-color: var(--mark-background-color);
 }
