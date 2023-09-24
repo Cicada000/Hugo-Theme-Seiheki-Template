@@ -1,23 +1,25 @@
 {{ if .Site.Params.Utterances.repo }}
-    <script src="https://utteranc.es/client.js"
-            repo="{{ .Site.Params.Utterances.repo }}"
-            issue-term="pathname"
-            theme="{{ .Site.Params.Utterances.theme }}"
-            crossorigin="anonymous"
-            async>
-    </script>
-
     <script>
-        document.getElementById("theme-toggle").addEventListener("click", () => {
-            const theme = document.body.className.includes("dark")
-                ? "github-light"
-                : "photon-dark";
-                const message = {
-                    type: "set-theme",
-                    theme: theme,
-                };
-                const utteranc = document.querySelector(".utterances-frame");
-                utteranc.contentWindow.postMessage(message, "https://utteranc.es");
-            });
+        var colorScheme;
+
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            colorScheme = 'dark';
+        } else {
+            colorScheme = 'light';
+        }
+    </script>
+    <script>
+        var themeValue = (colorScheme === 'dark') ? 'github-dark' : 'github-light';
+
+        var script = document.createElement('script');
+        script.src = 'https://utteranc.es/client.js';
+        script.setAttribute('repo', '{{ .Site.Params.Utterances.repo }}');
+        script.setAttribute('issue-term', 'pathname');
+        script.setAttribute('theme', themeValue);
+        script.setAttribute('crossorigin', 'anonymous');
+        script.async = true;
+
+        document.body.appendChild(script);
+
     </script>
 {{ end }}

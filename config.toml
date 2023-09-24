@@ -25,8 +25,5 @@ theme = 'north'
   webpanel = ""                                               # 统计网站面板，空值默认为官网
   id = "84f6eb25-5dcd-4e2b-b500-37a6ac27f531"                 # 网站的Website ID，空值不开启统计
 
-comments = true
-
 [params.Utterances]                                           # 添加Utterances评论
-  repo = "Cicada000/Blog-Comments"                            # 你的评论仓库
-  theme = ""                                                  # 你的Utterances主题
+  repo = "Cicada000/Blog-Comments"                            # 你的评论仓库，空值不启用评论
