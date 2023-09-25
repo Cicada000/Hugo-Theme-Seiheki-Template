@@ -19,6 +19,9 @@ html::-webkit-scrollbar { /* 隐藏滚动条 */
     --table-tr-odd-background-color: #efefee;
     --table-tr-even-background-color: #fafafc;
     --mark-background-color: #ffff00;
+    --toc-color: #77969A;
+    --toc-active-color: #268785;
+    --index-summary-color: #444444;
 }
 
 /*暗色模式*/
@@ -100,7 +103,7 @@ body {
 }
 
 .index-summary {
-    color: #444444;
+    color: var(--index-summary-color);
 }
 
 /*标签样式*/
@@ -161,11 +164,6 @@ th {
     border-bottom: 1.5px solid var(--table-border-color);
     padding: 4px 8px 4px 10px;
     line-height: 1.1;
-}
-
-::-webkit-scrollbar-thumb {
-    border-radius: 10px;
-    background: #4B5563;
 }
 
 /* 链接样式 */
@@ -253,7 +251,7 @@ kbd {
 }
 
 .toc a {
-    color: #77969A;
+    color: var(--toc-color);
     font-size: smaller;
     text-decoration: none;
 }
@@ -263,7 +261,7 @@ kbd {
 }
 
 .toc a.active {
-    color: #268785;
+    color: var(--toc-active-color);
     font-size: medium;
     font-weight: 700;
 }
