@@ -8,7 +8,8 @@
             tokenize: true,
             matchAllTokens: true,
             findAllMatches: true,
-            ignoreLocation: true
+            ignoreLocation: true,
+            includeMatches: true
         };
         const fuse = new Fuse(data, options);
 
@@ -22,6 +23,26 @@
                 link.href = result.item.permalink;
                 link.textContent = result.item.title;
                 item.appendChild(link);
+
+                // 提取匹配的片段
+                if (result.matches && result.matches.length) {
+                    result.matches.forEach(match => {
+                        if (match.key === 'content') {
+                            // 从HTML中提取纯文本
+                            let tempDiv = document.createElement('div');
+                            tempDiv.innerHTML = result.item.content;
+                            let plainTextContent = tempDiv.textContent || tempDiv.innerText;
+
+                            let start = Math.max(match.indices[0][0] - 30, 0);
+                            let end = Math.min(match.indices[0][1] + 30, plainTextContent.length);
+                            let snippet = '... ' + plainTextContent.substring(start, end) + ' ...';
+                            let snippetElem = document.createElement('p');
+                            snippetElem.textContent = snippet;
+                            item.appendChild(snippetElem);
+                        }
+                    });
+                }
+
                 searchResults.appendChild(item);
             });
         });
