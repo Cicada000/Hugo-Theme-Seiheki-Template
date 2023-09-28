@@ -3,8 +3,10 @@
         <div class="site-title" onclick="window.open('{{ .Site.BaseURL }}','_self')">{{ .Site.Title }}</div>
     </div>
     <br>
-    {{ range.Site.Menus.main }}
+    <div class="menu">
+        {{ range.Site.Menus.main }}
             <a href="{{ .URL | safeURL }}">{{ .Name }}</a>&emsp;
-    {{ end }}
-    <a href="/index.xml">RSS</a>&emsp;
+        {{ end }}
+        <a href="/index.xml">RSS</a>&emsp;
+    </div>
 </header>

@@ -4,7 +4,7 @@
     {{ $posts := where .Site.RegularPages "Type" "post" }}
     {{ range $posts.ByDate.Reverse }}
     <div class="post-entry">
-        <span class="post-date">{{ .Date.Format "2006-01-02" }}</span>
+        <span class="post-date">{{ .Date.Format "2006.01.02" }}</span>
         <a href="{{ .RelPermalink }}">{{ .Title }}</a>
     </div>
     {{ end }}
