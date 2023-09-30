@@ -6,7 +6,7 @@
                     <h1 class="post-title">{{ .Title }}</h1>
                 </header>
                 <i class="ri-time-line" style="color: var(--tag-color);"></i>
-                    <a class="up-time" href="{{ "/archives/" }}">{{ dateFormat "2006.1.1" .Date }}</a>
+                    <a class="up-time" href="{{ "/archives/" }}">{{ dateFormat "2006.01.02" .Date }}</a>
                     {{ if .Params.tags }}
                         <i class="ri-hashtag" style="color: var(--tag-color);"></i>
                     {{ end }}
