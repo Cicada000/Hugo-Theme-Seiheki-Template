@@ -49,7 +49,7 @@ html::-webkit-scrollbar { /* 隐藏滚动条 */
 
 /*长条屏幕不显示TOC*/
 
-@media screen and (max-aspect-ratio: 1.5) {
+@media screen and (max-aspect-ratio: 1.4) {
     .toc {
         display: none;
     }
@@ -234,10 +234,9 @@ kbd {
 }
 
 /*TOC样式*/
-/* CSS for TOC */
 .toc {
     position: fixed;
-    right: 30px;
+    right: 20px;
     width: 200px;
     padding: 10px;
     line-height: 20px;

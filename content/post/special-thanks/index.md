@@ -50,6 +50,10 @@ categories = [
 
 [WANG Chucheng](https://www.wangchucheng.com/zh/)
 
+## 404 Page
+
+[Codepen.io](https://codepen.io/MysticReborn/pen/rygqao)
+
 ## Other
 
 [New Bing AI](https://bing.com)
