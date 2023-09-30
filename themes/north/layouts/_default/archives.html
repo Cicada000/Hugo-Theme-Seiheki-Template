@@ -1,12 +1,16 @@
 {{ define "main" }}
 <div class="archives">
-    <h1>文章归档</h1>
+    <h1>Archives</h1>
     {{ $posts := where .Site.RegularPages "Type" "post" }}
-    {{ range $posts.ByDate.Reverse }}
+    {{ $groupedPosts := $posts.GroupByDate "2006" }}
+    {{ range $groupedPosts }}
+    <h2>{{ .Key }}</h2>
+    {{ range .Pages }}
     <div class="post-entry">
-        <span class="post-date">{{ .Date.Format "2006.01.02" }}</span>
+        <span class="post-date">{{ .Date.Format "01.02" }}</span>
         <a href="{{ .RelPermalink }}">{{ .Title }}</a>
     </div>
+    {{ end }}
     {{ end }}
 </div>
 {{ end }}
