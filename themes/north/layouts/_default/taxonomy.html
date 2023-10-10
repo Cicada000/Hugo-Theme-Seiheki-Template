@@ -1,9 +1,12 @@
 {{ define "main" }}
+    <!-- This is the taxonomy template -->
     <div class="tag-page">
         <h1>{{ .Title }}</h1>
         <ul>
             {{ range .Pages }}
             <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+            {{ else }}
+            <li>No posts found.</li>
             {{ end }}
         </ul>
     </div>
