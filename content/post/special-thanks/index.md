@@ -50,6 +50,10 @@ categories = [
 
 [WANG Chucheng](https://www.wangchucheng.com/zh/)
 
+## Search Function
+
+[Fuse.js](https://www.fusejs.io/)
+
 ## 404 Page
 
 [Codepen.io](https://codepen.io/MysticReborn/pen/rygqao)

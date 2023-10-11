@@ -3,7 +3,7 @@
 开发进度
 
 - [x] Archives页面
-- [ ] Tags页面
+- [x] Tags页面
 - [x] Search页面
 - [ ] CSS美化
 - [ ] 图片灯箱

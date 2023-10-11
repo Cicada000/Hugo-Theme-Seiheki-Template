@@ -23,6 +23,7 @@ html::-webkit-scrollbar { /* 隐藏滚动条 */
     --toc-active-color: #268785;
     --index-summary-color: #444444;
     --search-input-background-color: #cccccc;
+    --tags-page-number-color: #b0b0b0;
 }
 
 /*暗色模式*/
@@ -295,4 +296,14 @@ mark {
     padding: 5px;
     font-size: 16px;
     outline: none;
+}
+
+.tag-page {
+    font-size: 18px;
+}
+
+a span {
+    color: var(--tags-page-number-color);
+    font-size: 3px;
+    vertical-align: top;
 }
