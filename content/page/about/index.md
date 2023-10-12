@@ -9,4 +9,4 @@ menu:
 
 # About this site
 
-&emsp;&emsp;This is a demo website for hugo blog north theme.
+&emsp;&emsp;This is a demo website for hugo blog seiheki theme.

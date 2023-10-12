@@ -38,8 +38,13 @@ document.addEventListener("DOMContentLoaded", function() {
     let toc = document.getElementById('page-scrollspy');
     if (!toc) return;
 
-    let headers = document.querySelectorAll('h1, h2');
     let tocLinks = toc.querySelectorAll('a');
+    // Encode TOC links
+    tocLinks.forEach(link => {
+        link.href = "#" + encodeURIComponent(link.href.split("#")[1]);
+    });
+
+    let headers = document.querySelectorAll('h1, h2');
     let lastIntersecting = null;
 
     headers.forEach(header => {
@@ -47,7 +52,7 @@ document.addEventListener("DOMContentLoaded", function() {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     if (lastIntersecting) {
-                        let prevLink = toc.querySelector(`a[href="#${lastIntersecting.id}"]`);
+                        let prevLink = toc.querySelector(`a[href="#${encodeURIComponent(lastIntersecting.id)}"]`);
                         if (prevLink) {
                             prevLink.classList.add('active');
                         }
@@ -55,9 +60,12 @@ document.addEventListener("DOMContentLoaded", function() {
                     tocLinks.forEach(link => {
                         link.classList.remove('active');
                     });
-                    let activeLink = toc.querySelector(`a[href="#${entry.target.id}"]`);
+                    let targetId = encodeURIComponent(entry.target.id);
+                    let activeLink = toc.querySelector(`a[href="#${targetId}"]`);
                     if (activeLink) {
                         activeLink.classList.add('active');
+                    } else {
+                        console.warn(`No link found for ${targetId}`);
                     }
                     lastIntersecting = entry.target;
                 }

@@ -1,4 +1,4 @@
-# Hugo-Theme-North-Template
+# Hugo-Theme-Seiheki-Template
 
 开发进度
 

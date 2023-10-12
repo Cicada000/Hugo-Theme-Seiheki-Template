@@ -304,6 +304,6 @@ mark {
 
 a span {
     color: var(--tags-page-number-color);
-    font-size: 3px;
+    font-size: 13px;
     vertical-align: top;
 }
