@@ -58,6 +58,10 @@ categories = [
 
 [Codepen.io](https://codepen.io/MysticReborn/pen/rygqao)
 
+## Icon
+
+[Remix icon](https://remixicon.com)
+
 ## Other
 
 [New Bing AI](https://bing.com)

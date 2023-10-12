@@ -1,7 +1,7 @@
 baseURL = 'https://hugo-theme-north-template.vercel.app'      # 网站域名
 languageCode = 'en-us'                                        # 网页语言
 title = 'My New Hugo Site'                                    # 网站Title
-theme = 'north'
+theme = 'seiheki'
 
 [markup]
   [markup.highlight]
