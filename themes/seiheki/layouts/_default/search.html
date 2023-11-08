@@ -3,9 +3,11 @@
     <ul id="search-results"></ul>
 
     <script>
+        // 获取索引数据
         fetch('/index.json')
         .then(response => response.json())
         .then(data => {
+            // 配置Fuse.js选项
             const options = {
                 keys: ['title', 'content'],
                 threshold: 0.2,
@@ -15,12 +17,17 @@
                 ignoreLocation: true,
                 includeMatches: true
             };
+            // 初始化Fuse.js
             const fuse = new Fuse(data, options);
     
+            // 绑定输入框的事件监听器
             document.getElementById('search-input').addEventListener('input', function() {
+                // 执行搜索
                 let results = fuse.search(this.value);
                 let searchResults = document.getElementById('search-results');
                 searchResults.innerHTML = '';
+                
+                // 为每个搜索结果创建一个列表项
                 results.forEach(result => {
                     let item = document.createElement('li');
                     let link = document.createElement('a');
@@ -28,25 +35,31 @@
                     link.textContent = result.item.title;
                     item.appendChild(link);
     
-                    // 提取匹配的片段
+                    // 处理匹配到的片段
                     if (result.matches && result.matches.length) {
-                        result.matches.forEach(match => {
-                            if (match.key === 'content') {
-                                // 从HTML中提取纯文本
-                                let tempDiv = document.createElement('div');
-                                tempDiv.innerHTML = result.item.content;
-                                let plainTextContent = tempDiv.textContent || tempDiv.innerText;
+                        // 只处理第一个匹配项
+                        let firstMatch = result.matches[0]; // 假定按照相关性排序
+                        if (firstMatch.key === 'content') {
+                            // 先提取HTML中的纯文本
+                            let tempDiv = document.createElement('div');
+                            tempDiv.innerHTML = result.item.content;
+                            let plainTextContent = tempDiv.textContent || tempDiv.innerText;
     
-                                let start = Math.max(match.indices[0][0] - 30, 0);
-                                let end = Math.min(match.indices[0][1] + 30, plainTextContent.length);
-                                let snippet = '... ' + plainTextContent.substring(start, end) + ' ...';
-                                let snippetElem = document.createElement('p');
-                                snippetElem.textContent = snippet;
-                                item.appendChild(snippetElem);
-                            }
-                        });
+                            // 获取第一个匹配项的索引
+                            let [start, end] = firstMatch.indices[0];
+                            // 计算摘要的起始和结束索引
+                            let snippetStart = Math.max(start - 30, 0);
+                            let snippetEnd = Math.min(end + 30, plainTextContent.length);
+                            // 提取摘要文本
+                            let snippet = '... ' + plainTextContent.substring(snippetStart, snippetEnd) + ' ...';
+                            // 创建段落元素以显示摘要
+                            let snippetElem = document.createElement('p');
+                            snippetElem.textContent = snippet;
+                            item.appendChild(snippetElem);
+                        }
                     }
     
+                    // 将列表项添加到搜索结果中
                     searchResults.appendChild(item);
                 });
             });
