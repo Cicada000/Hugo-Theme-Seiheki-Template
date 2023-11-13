@@ -111,6 +111,82 @@ body {
     margin-top: 5%;
 }
 
+
+.menu {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+
+.menu li {
+    text-align: left;
+    background-color: transparent; /* 背景颜色 */
+    padding: 10px; /* 内边距 */
+}
+
+/* 定义菜单项的链接的样式 */
+.menu li a {
+    text-decoration: none; /* 去掉下划线 */
+    color: var(--link-color); /* 文字颜色 */
+}
+
+.menu li a :hover {
+    background-color: var(--body-background-color); /* 文字颜色 */
+    color: var(--link-color-hover);
+}
+
+/* 定义菜单的按钮的样式 */
+.menu-button {
+    display: none; /* 默认不显示 */
+    position: fixed; /* 固定位置 */
+    top: 10px; /* 距离顶部10px */
+    right: 10px; /* 距离右边10px */
+    width: 50px; /* 宽度 */
+    height: 50px; /* 高度 */
+    background-color: #333; /* 背景颜色 */
+    border: none; /* 无边框 */
+    cursor: pointer; /* 鼠标样式 */
+}
+
+/* 定义菜单的按钮的悬停效果 */
+.menu-button:hover {
+    background-color: #555; /* 背景颜色 */
+}
+
+/* 定义菜单的按钮的图标的样式 */
+.menu-button::before {
+    content: "\2630"; /* 使用Unicode字符表示菜单图标 */
+    color: white; /* 文字颜色 */
+    font-size: 30px; /* 字体大小 */
+    line-height: 50px; /* 行高 */
+    text-align: center; /* 文本居中 */
+}
+
+/* 定义菜单的按钮的激活状态的样式 */
+.menu-button:active {
+    background-color: #777; /* 背景颜色 */
+}
+
+/* 使用媒体查询在网页宽度小于600px时改变菜单的样式 */
+@media screen and (max-width: 600px) {
+/* 隐藏所有的菜单项 */
+.menu li {
+    display: none;
+}
+
+/* 显示菜单的按钮 */
+.menu-button {
+    display: block;
+}
+
+/* 当菜单的按钮被点击时，显示所有的菜单项 */
+.menu-button:checked ~ .menu li {
+    display: block;
+    }
+}
+
 /*首页展示文章样式*/
 
 .index-post {
