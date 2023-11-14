@@ -7,9 +7,10 @@
         <input type="checkbox" id="menu-button" class="menu-button" />
         <ul class="menu">
             <li>
-                <a href="/index.xml">RSS</a>&emsp;
+                <div style="height: 10px;"></div>
+                <a href="/index.xml">RSS</a><div style="height: 10px;"></div>
                 {{ range.Site.Menus.main }}
-                <a href="{{ .URL | safeURL }}">{{ .Name }}</a>&emsp;
+                <a href="{{ .URL | safeURL }}">{{ .Name }}</a><div style="height: 10px;"></div>
                 {{ end }}
             </li>
         </ul>

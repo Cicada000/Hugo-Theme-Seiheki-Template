@@ -180,9 +180,11 @@ body {
         display: flex;
         flex-direction: column;
         align-items: center;
+        background-color: var(--search-input-background-color);
+        border-radius: 2px;
         padding: 0;
     }
-/* 隐藏所有的菜单项 */
+
     .menu li {
         display: none;
         text-align: center;
@@ -204,7 +206,7 @@ body {
     /* 当菜单的按钮被点击时，显示所有的菜单项 */
     .menu-button:checked ~ .menu li {
         display: block;
-        }
+    }
 }
 
 /*首页展示文章样式*/
