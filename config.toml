@@ -3,6 +3,9 @@ languageCode = 'en-us'                                        # 网页语言
 title = 'My New Hugo Site'                                    # 网站Title
 theme = 'seiheki'
 
+[params]
+    subtitle = "This is a subtitle"
+
 [markup]
   [markup.highlight]
     codeFences = true

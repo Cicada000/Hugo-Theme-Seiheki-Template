@@ -1,14 +1,13 @@
 <header>
     <div class="title-block">
         <div class="site-title" onclick="window.open('{{ .Site.BaseURL }}','_self')">{{ .Site.Title }}</div>
+        <div class="site-subtitle">{{ .Site.Params.subtitle }}</div>
     </div>
     <br>
     <div>
         <input type="checkbox" id="menu-button" class="menu-button" />
         <ul class="menu">
             <li>
-                <div style="height: 15px;"></div>
-                <a href="/index.xml">RSS</a>&emsp;
                 {{ range.Site.Menus.main }}
                 <a href="{{ .URL | safeURL }}">{{ .Name }}</a>&emsp;
                 {{ end }}

@@ -24,6 +24,7 @@ html::-webkit-scrollbar { /* 隐藏滚动条 */
     --index-summary-color: #444444;
     --search-input-background-color: #cccccc;
     --tags-page-number-color: #b0b0b0;
+    --menu-link-color: #78C2C4;
 }
 
 /*暗色模式*/
@@ -107,15 +108,36 @@ body {
     background-color: var(--site-title-color-hover);
 }
 
+.site-subtitle {
+    margin-top: 10px;
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--site-title-color);
+    transition: all 0.5s;
+}
+
 .title-block {
     margin-top: 5%;
+}
+
+/* 标签样式 */
+a {
+    color: var(--link-color);
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.5s;
+}
+
+a:hover {
+    color: var(--body-background-color);
+    background-color: var(--link-color-hover);
 }
 
 /* 顶部菜单样式 */
 .menu {
     display: flex;
     list-style: none;
-    margin: 0;
+    margin: -10px 0 -10px -10px;
     padding: 0;
 }
 
@@ -129,7 +151,7 @@ body {
 /* 定义菜单项的链接的样式 */
 .menu li a {
     text-decoration: none;
-    color: var(--link-color);
+    color: var(--menu-link-color);
 }
 
 .menu li a :hover {
@@ -277,20 +299,6 @@ th {
     border-bottom: 1.5px solid var(--table-border-color);
     padding: 4px 8px 4px 10px;
     line-height: 1.1;
-}
-
-/* 链接样式 */
-
-a {
-    color: var(--link-color);
-    font-weight: 700;
-    text-decoration: none;
-    transition: all 0.5s;
-}
-
-a:hover {
-    color: var(--body-background-color);
-    background-color: var(--link-color-hover);
 }
 
 .post-link {
