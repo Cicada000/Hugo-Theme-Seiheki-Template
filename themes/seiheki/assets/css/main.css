@@ -412,3 +412,10 @@ a span {
     font-size: 13px;
     vertical-align: top;
 }
+
+/* 页脚一言样式 */
+#onetext {
+    font-size: 16px;
+    color: var(--link-color);
+    margin-top: 20px;
+}
