@@ -28,6 +28,7 @@
         .then(response => response.json())
         .then(data => {
         const onetext = document.getElementById('onetext')
+        onetext.href = 'https://onetext.cicada000.work/?id=' + data.id
         onetext.innerText = data.text
         })
         .catch(console.error)

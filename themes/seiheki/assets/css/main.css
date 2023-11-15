@@ -341,7 +341,8 @@ kbd {
 /*TOC样式*/
 .toc {
     position: fixed;
-    right: 20px;
+    top: 20%;
+    right: 0;
     width: 200px;
     padding: 10px;
     line-height: 20px;
