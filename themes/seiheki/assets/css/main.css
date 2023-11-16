@@ -24,7 +24,7 @@ html::-webkit-scrollbar { /* 隐藏滚动条 */
     --index-summary-color: #444444;
     --search-input-background-color: #cccccc;
     --tags-page-number-color: #b0b0b0;
-    --menu-link-color: #78C2C4;
+    --menu-link-color: #31777a;
 }
 
 /*暗色模式*/
@@ -42,6 +42,7 @@ html::-webkit-scrollbar { /* 隐藏滚动条 */
         --table-tr-even-background-color: #050503;
         --mark-background-color: #b8b800;
         --search-input-background-color: #2b2b2b;
+        --menu-link-color: #78C2C4;
     }
 
     img {
@@ -155,8 +156,8 @@ a:hover {
 }
 
 .menu li a :hover {
-    background-color: var(--body-background-color);
-    color: var(--link-color-hover);
+    background-color: var(--menu-link-color);
+    color: var(--body-background-color);
 }
 
 /* 定义菜单的按钮的样式 */
@@ -203,7 +204,6 @@ a:hover {
         flex-direction: column;
         align-items: center;
         background-color: var(--search-input-background-color);
-        border-radius: 2px;
         padding: 0;
     }
 
@@ -213,16 +213,26 @@ a:hover {
         background-color: transparent;
         padding: 10px;
         width: 100%;
+        line-height: 50px;
+        box-sizing: border-box;
     }
 
     .menu li a {
         display: block;
         width: 100%;
+        height: 50px;
+    }
+
+    .menu li a:hover {
+        background-color: var(--body-background-color);
+        color: var(--link-color-hover);
     }
 
     /* 显示菜单的按钮 */
     .menu-button {
+        background-color: transparent;
         display: block;
+        margin-top: 5px;
     }
 
     /* 当菜单的按钮被点击时，显示所有的菜单项 */
@@ -427,4 +437,8 @@ a span {
     font-size: 16px;
     color: var(--link-color);
     margin-top: 20px;
+}
+
+#onetext:hover {
+    color: var(--body-background-color);
 }

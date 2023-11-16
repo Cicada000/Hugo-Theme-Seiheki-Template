@@ -67,3 +67,7 @@ categories = [
 [New Bing AI](https://bing.com)
 <br>
 [ChatGPT](https://chat.openai.com/)
+<br>
+[Github Copilot](https://github.com/features/copilot)
+<br>
+[文心一言](https://yiyan.baidu.com)

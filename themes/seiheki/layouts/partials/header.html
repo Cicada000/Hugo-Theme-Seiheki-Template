@@ -9,7 +9,7 @@
         <ul class="menu">
             <li>
                 {{ range.Site.Menus.main }}
-                <a href="{{ .URL | safeURL }}">{{ .Name }}</a>&emsp;
+                <a href="{{ .URL | safeURL }}">{{ .Name }}</a>
                 {{ end }}
             </li>
         </ul>
