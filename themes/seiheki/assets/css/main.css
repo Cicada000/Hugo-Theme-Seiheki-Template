@@ -153,6 +153,7 @@ a:hover {
 .menu li a {
     text-decoration: none;
     color: var(--menu-link-color);
+    margin-right: 15px;
 }
 
 .menu li a :hover {
