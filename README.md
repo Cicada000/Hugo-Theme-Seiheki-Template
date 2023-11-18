@@ -1,5 +1,10 @@
 # Hugo-Theme-Seiheki-Template
 
+<center>
+    <img src="resources/img/Ultrawide.svg">
+    <p>青碧，一个简陋的Hugo博客主题</p>
+</center>
+
 开发进度
 
 - [x] Archives页面
@@ -11,4 +16,4 @@
 - [x] Utterance评论
 - [x] 移动端适配
 - [ ] 文章字数统计
-- [ ] 网页页脚美化
+- [x] 网页页脚美化
