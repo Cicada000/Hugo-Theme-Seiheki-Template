@@ -1,9 +1,8 @@
 baseURL = 'https://seiheki-demo.cicada000.work'               # 网站域名
-languageCode = 'zh-cn'                                        # 网页语言
+languageCode = 'en-us'                                        # 网页语言
 title = 'My New Hugo Site'                                    # 网站Title
 theme = 'seiheki'
 hasCJKLanguage = true
-
 
 [params]
     subtitle = "This is a subtitle"
