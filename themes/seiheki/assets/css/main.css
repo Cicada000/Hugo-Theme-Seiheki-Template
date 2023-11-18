@@ -465,3 +465,7 @@ a span {
 .copyright:hover {
     color: var(--body-background-color);
 }
+
+.more-meta {
+    color: var(--tag-color);
+}
