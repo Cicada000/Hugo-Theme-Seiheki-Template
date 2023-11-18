@@ -1,8 +1,10 @@
 # Hugo-Theme-Seiheki-Template
 
 <center>
-    <img src="resources/img/Ultrawide.svg">
-    <p>青碧，一个简陋的Hugo博客主题</p>
+    <img src="resources/img/Ultrawide.png">
+</center>
+<center>
+    青碧，一个简陋的Hugo博客主题。
 </center>
 
 开发进度
