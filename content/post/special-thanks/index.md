@@ -54,6 +54,10 @@ categories = [
 
 [Fuse.js](https://www.fusejs.io/)
 
+## Image Lightbox
+
+[人生筆記簿](https://blog.muxilong.com/pocket/hugo/hugo-%E4%BD%BF%E7%94%A8-fancybox-%E5%AE%9E%E7%8E%B0%E5%9B%BE%E7%89%87%E7%81%AF%E7%AE%B1-%E6%94%BE%E5%A4%A7%E5%8A%9F%E8%83%BD/)
+
 ## 404 Page
 
 [Codepen.io](https://codepen.io/MysticReborn/pen/rygqao)

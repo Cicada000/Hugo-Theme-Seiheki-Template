@@ -5,6 +5,8 @@ theme = 'seiheki'
 
 [params]
     subtitle = "This is a subtitle"
+    fancybox = true
+
 
 [markup]
   [markup.highlight]

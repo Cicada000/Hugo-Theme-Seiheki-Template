@@ -156,7 +156,7 @@ a:hover {
     margin-right: 15px;
 }
 
-.menu li a :hover {
+.menu li a:hover {
     background-color: var(--menu-link-color);
     color: var(--body-background-color);
 }
