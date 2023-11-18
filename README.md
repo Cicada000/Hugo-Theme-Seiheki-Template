@@ -3,9 +3,9 @@
 <center>
     <img src="resources/img/Ultrawide.png">
 </center>
-<center>
-    青碧，一个简陋的Hugo博客主题。
-</center>
+
+<p align="center">青碧，一个简陋的Hugo博客主题。</p>
+
 
 开发进度
 
