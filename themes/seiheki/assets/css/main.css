@@ -325,6 +325,10 @@ th {
     line-height: 1.1;
 }
 
+.post {
+    margin-top: -10px;
+}
+
 .post-link {
     font-size: 24px;
 }
