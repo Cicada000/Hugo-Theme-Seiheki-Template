@@ -2,6 +2,8 @@
     {{ $styles := resources.Get "css/main.css" }}
     <link rel="stylesheet" href="{{ $styles.RelPermalink }}">
 
+    <link rel="shortcut icon" href="{{ .Site.Params.favicon }}" type="image/x-icon" />
+
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@500;700;900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300&display=swap" rel="stylesheet">

@@ -329,6 +329,12 @@ th {
     font-size: 24px;
 }
 
+.post-title{
+    color: var(--table-border-color);
+    font-size: 30px;
+    font-weight: 900;
+}
+
 /*代码块样式*/
 
 pre {
