@@ -1,6 +1,6 @@
 {{- $image := .Params.image }}
 {{- if not $image }}
-  {{- $image = "default-image.jpg" }} {{/* 默认图片路径，如果文章中没有指定图片 */}}
+    {{- $image = "default-image.jpg" }}
 {{- end }}
 
 <meta property="og:title" content="{{ .Title }}" />
@@ -10,8 +10,8 @@
 <meta property="og:site_name" content="{{ .Site.Title }}" />
 
 {{- with .Description }}
-  <meta property="og:description" content="{{ . }}" />
+    <meta property="og:description" content="{{ . }}" />
 {{- else }}
-  <meta property="og:description" content="{{ .Site.Params.description }}" />
+    <meta property="og:description" content="{{ .Site.Params.description }}" />
 {{- end }}
 

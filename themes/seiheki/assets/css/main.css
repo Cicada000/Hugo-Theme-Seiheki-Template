@@ -422,8 +422,7 @@ kbd {
 }
 
 img {
-    width: 50%;
-    max-width: 350px;
+    max-width: 50%;
     height: auto;
     text-align: center;
     display: block;
