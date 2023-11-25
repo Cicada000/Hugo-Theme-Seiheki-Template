@@ -1,0 +1,17 @@
+{{- $image := .Params.image }}
+{{- if not $image }}
+  {{- $image = "default-image.jpg" }} {{/* 默认图片路径，如果文章中没有指定图片 */}}
+{{- end }}
+
+<meta property="og:title" content="{{ .Title }}" />
+<meta property="og:type" content="{{ if .IsHome }}website{{ else }}article{{ end }}" />
+<meta property="og:url" content="{{ .Permalink }}" />
+<meta property="og:image" content="{{ printf "%s%s" .Site.BaseURL $image }}" />
+<meta property="og:site_name" content="{{ .Site.Title }}" />
+
+{{- with .Description }}
+  <meta property="og:description" content="{{ . }}" />
+{{- else }}
+  <meta property="og:description" content="{{ .Site.Params.description }}" />
+{{- end }}
+
