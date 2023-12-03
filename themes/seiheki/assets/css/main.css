@@ -59,8 +59,12 @@ html::-webkit-scrollbar { /* 隐藏滚动条 */
 }
 
 /*整体布局*/
+.wrapper {
+    display: flex;
+    justify-content: space-between;
+}
 
-body {
+.main{
     background-color: var(--body-background-color);
     font-family: "Noto Serif SC", sans-serif;
     width: 60%;

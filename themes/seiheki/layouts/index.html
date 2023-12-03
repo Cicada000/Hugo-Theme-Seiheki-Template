@@ -1,6 +1,8 @@
 {{ define "main"}}
     <body>
-        {{ range where .Site.RegularPages "Type" "post" }}
+        <div class="wrapper">
+            <div class="main">
+                {{ range where .Site.RegularPages "Type" "post" }}
             <div class="index-post">
                     <a class="post-link" href="{{ .Permalink }}">{{ .Title }}</a>
                     {{ if .Params.description }}
@@ -20,5 +22,7 @@
             </div>
             <br>
             {{ end }}
+            </div>
+        </div>
         </body>
 {{end}}
