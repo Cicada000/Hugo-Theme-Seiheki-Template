@@ -10,8 +10,12 @@
     <body>
         {{- partial "header.html" . -}}
         <br>
-        <div>
-        {{- block "main" . }}{{- end }}
+        <div class="wrapper">
+            <div class="main">
+                <div>
+                    {{- block "main" . }}{{- end }}
+                </div>
+            </div>
         </div>
         {{- partial "footer.html" . -}}
     </body>

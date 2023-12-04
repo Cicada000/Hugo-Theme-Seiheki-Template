@@ -1,30 +1,26 @@
 {{ define "main"}}
     <body>
-        <div class="wrapper">
-            <div class="main">
-                <div id="post" class="post">
-                    <article>
-                        <header>
-                            <h1 class="post-title">{{ .Title }}</h1>
-                        </header>
-                        <i class="ri-time-line" style="color: var(--tag-color);"></i>
-                        <a class="up-time" href="{{ "/archives/" }}">{{ dateFormat "2006.01.02" .Date }}</a>
-                        <br>
-                        {{ if .Params.tags }}
-                            <i class="ri-hashtag" style="color: var(--tag-color);"></i>
-                        {{ end }}
-                        {{ range .Params.tags }}
-                            <a class="tags" href="{{ "/tags/" | relLangURL }}{{ . | urlize }}">{{ . }}</a>
-                        {{ end }}
-                        <br>
-                        <i class="ri-eye-line" style="color: var(--tag-color);"></i>
-                        <span class="more-meta"> {{ .ReadingTime  }} minute read</span>
-                        {{- partial "toc.html" . }}
-                        {{.Content}}
-                    </article>
-                </div>
-                {{- partial "comments.html" . }}
-            </div>
+        <div id="post" class="post">
+            <article>
+                <header>
+                    <h1 class="post-title">{{ .Title }}</h1>
+                </header>
+                <i class="ri-time-line" style="color: var(--tag-color);"></i>
+                <a class="up-time" href="{{ "/archives/" }}">{{ dateFormat "2006.01.02" .Date }}</a>
+                <br>
+                {{ if .Params.tags }}
+                    <i class="ri-hashtag" style="color: var(--tag-color);"></i>
+                {{ end }}
+                {{ range .Params.tags }}
+                    <a class="tags" href="{{ "/tags/" | relLangURL }}{{ . | urlize }}">{{ . }}</a>
+                {{ end }}
+                <br>
+                <i class="ri-eye-line" style="color: var(--tag-color);"></i>
+                <span class="more-meta"> {{ .ReadingTime  }} minute read</span>
+                {{- partial "toc.html" . }}
+                {{.Content}}
+            </article>
         </div>
+        {{- partial "comments.html" . }}
     </body>
 {{ end }}

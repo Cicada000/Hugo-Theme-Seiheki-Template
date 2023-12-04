@@ -79,6 +79,10 @@ html::-webkit-scrollbar { /* 隐藏滚动条 */
     animation-fill-mode: forwards; 
 }
 
+body{
+    background-color: var(--body-background-color);
+}
+
 @keyframes fadeInAnimation { 
     0% { 
         opacity: 0;
@@ -91,7 +95,7 @@ html::-webkit-scrollbar { /* 隐藏滚动条 */
 /* 改善移动端浏览体验 */
 
 @media screen and (max-aspect-ratio: 0.7) {
-    body {
+    .main {
         width: 85%;
     }
 }
@@ -381,7 +385,7 @@ kbd {
 }
 
 .highlight table > tbody > tr > td {
-    background-color: var(--body-background-color);
+    background-color: #272823;  /* 这里需要修改 原为var(--body-background-color) */
 }
 
 /*TOC样式*/
@@ -474,7 +478,7 @@ a span {
     color: var(--site-title-color);
     transition: all 0.5s;
 }
-
+ 
 .copyright:hover {
     color: var(--body-background-color);
 }

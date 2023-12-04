@@ -1,28 +1,24 @@
 {{ define "main"}}
     <body>
-        <div class="wrapper">
-            <div class="main">
-                {{ range where .Site.RegularPages "Type" "post" }}
-            <div class="index-post">
-                    <a class="post-link" href="{{ .Permalink }}">{{ .Title }}</a>
-                    {{ if .Params.description }}
-                        <p>{{ .Params.description }}</p>
-                        {{ else }}
-                        <p>{{ .Summary | plainify | truncate 100 }}</p>
-                    {{ end }}
-                    <i class="ri-time-line" style="color: var(--tag-color);"></i>
-                    <a class="up-time" href="{{ "/archives/" }}">{{ dateFormat "2006.01.02" .Date }}</a>
-                    {{ if .Params.tags }}
-                        <i class="ri-hashtag" style="color: var(--tag-color);"></i>
-                    {{ end }}
-                    {{ range .Params.tags }}
-                        <a class="tags" href="{{ "/tags/" | relLangURL }}{{ . | urlize }}">{{ . }}</a>
-                    {{ end }}
-                    <br>
-            </div>
-            <br>
+        {{ range where .Site.RegularPages "Type" "post" }}
+        <div class="index-post">
+            <a class="post-link" href="{{ .Permalink }}">{{ .Title }}</a>
+            {{ if .Params.description }}
+                <p>{{ .Params.description }}</p>
+                {{ else }}
+                <p>{{ .Summary | plainify | truncate 100 }}</p>
             {{ end }}
-            </div>
+            <i class="ri-time-line" style="color: var(--tag-color);"></i>
+            <a class="up-time" href="{{ "/archives/" }}">{{ dateFormat "2006.01.02" .Date }}</a>
+            {{ if .Params.tags }}
+                <i class="ri-hashtag" style="color: var(--tag-color);"></i>
+            {{ end }}
+            {{ range .Params.tags }}
+                <a class="tags" href="{{ "/tags/" | relLangURL }}{{ . | urlize }}">{{ . }}</a>
+            {{ end }}
+            <br>
         </div>
-        </body>
+        <br>
+        {{ end }}
+    </body>
 {{end}}
