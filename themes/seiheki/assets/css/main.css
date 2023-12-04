@@ -81,6 +81,12 @@ html::-webkit-scrollbar { /* 隐藏滚动条 */
 
 body{
     background-color: var(--body-background-color);
+    --duration: 1s;
+    --timing: ease-in-out;
+    transition: background-color var(--duration);
+    animation: fadeInAnimation ease 1s;
+    animation-iteration-count: 1; 
+    animation-fill-mode: forwards;
 }
 
 @keyframes fadeInAnimation { 
@@ -118,11 +124,17 @@ body{
 }
 
 .site-subtitle {
+    display: inline-block;
     margin-top: 10px;
     font-weight: 700;
     font-size: 1rem;
     color: var(--site-title-color);
     transition: all 0.5s;
+}
+
+.site-subtitle:hover {
+    color: var(--body-background-color);
+    background-color: var(--site-title-color-hover);
 }
 
 .title-block {
