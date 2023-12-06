@@ -359,6 +359,10 @@ th {
     font-weight: 900;
 }
 
+.post-date{
+    color: var(--site-title-color);
+}
+
 /*代码块样式*/
 
 pre {

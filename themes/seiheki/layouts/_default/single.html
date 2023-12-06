@@ -2,13 +2,11 @@
     <body>
         <div id="post" class="post">
             <article>
-                <header>
-                    <h1 class="post-title">{{ .Title }}</h1>
-                </header>
+                <h1 class="post-title">{{ .Title }}</h1>
                 <i class="ri-time-line" style="color: var(--tag-color);"></i>
                 <a class="up-time" href="{{ "/archives/" }}">{{ dateFormat "2006.01.02" .Date }}</a>
-                <br>
                 {{ if .Params.tags }}
+                    <br>
                     <i class="ri-hashtag" style="color: var(--tag-color);"></i>
                 {{ end }}
                 {{ range .Params.tags }}
