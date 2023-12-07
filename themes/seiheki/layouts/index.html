@@ -1,24 +1,33 @@
 {{ define "main"}}
-    <body>
-        {{ range where .Site.RegularPages "Type" "post" }}
-        <div class="index-post">
-            <a class="post-link" href="{{ .Permalink }}">{{ .Title }}</a>
-            {{ if .Params.description }}
-                <p>{{ .Params.description }}</p>
-                {{ else }}
-                <p>{{ .Summary | plainify | truncate 100 }}</p>
-            {{ end }}
-            <i class="ri-time-line" style="color: var(--tag-color);"></i>
-            <a class="up-time" href="{{ "/archives/" }}">{{ dateFormat "2006.01.02" .Date }}</a>
-            {{ if .Params.tags }}
-                <i class="ri-hashtag" style="color: var(--tag-color);"></i>
-            {{ end }}
-            {{ range .Params.tags }}
-                <a class="tags" href="{{ "/tags/" | relLangURL }}{{ . | urlize }}">{{ . }}</a>
-            {{ end }}
-            <br>
-        </div>
-        <br>
+<body>
+    <!-- 创建一个分页器对象，设置每页显示的文章数量 -->
+    {{ $paginator := .Paginate (where .Site.RegularPages "Type" "post") .Site.Params.paginate }}
+    
+    <!-- 循环显示当前页的文章 -->
+    {{ range $paginator.Pages }}
+    <div class="index-post">
+        <a class="post-link" href="{{ .Permalink }}">{{ .Title }}</a>
+        {{ if .Params.description }}
+            <p>{{ .Params.description }}</p>
+        {{ else }}
+            <p>{{ .Summary | plainify | truncate 100 }}</p>
         {{ end }}
-    </body>
-{{end}}
+    </div>
+    <br>
+    {{ end }}
+
+    <!-- 分页控件 -->
+    {{ if gt $paginator.TotalPages 1 }}
+    <nav class="pagination">
+        {{ if $paginator.HasPrev }}
+        <a href="{{ $paginator.Prev.URL }}">Prev</a>
+        {{ end }}
+        {{ if $paginator.HasNext }}
+        <a href="{{ $paginator.Next.URL }}">Next</a>
+        {{ end }}
+        <br>
+        <span>Page {{ $paginator.PageNumber }} of {{ $paginator.TotalPages }}</span>
+    </nav>
+    {{ end }}
+</body>
+{{ end }}

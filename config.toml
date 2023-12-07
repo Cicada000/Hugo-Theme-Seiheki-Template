@@ -8,6 +8,7 @@ hasCJKLanguage = true
     subtitle = "This is a demo site."                         # 网站副标题
     favicon = "https://www.cicada000.work/favicon.png"        # 网站Favicon 
     fancybox = true                                           # 开启图片灯箱
+    paginate = 10
 
 [params.Umami]                                                # Umami网站数据统计
   webpanel = ""                                               # 统计网站面板，空值默认为官网
