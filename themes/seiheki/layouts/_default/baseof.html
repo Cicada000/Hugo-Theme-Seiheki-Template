@@ -8,10 +8,10 @@
     {{- partial "head.html" . -}}
     {{- partial "js.html" . -}}
     <body>
-        {{- partial "header.html" . -}}
-        <br>
         <div class="wrapper">
             <div class="main">
+                {{- partial "header.html" . -}}
+                <br>
                 <div>
                     {{- block "main" . }}{{- end }}
                 </div>

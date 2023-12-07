@@ -2,8 +2,6 @@
 <body>
     <!-- 创建一个分页器对象，设置每页显示的文章数量 -->
     {{ $paginator := .Paginate (where .Site.RegularPages "Type" "post") .Site.Params.paginate }}
-    
-    <!-- 循环显示当前页的文章 -->
     {{ range $paginator.Pages }}
     <div class="index-post">
         <a class="post-link" href="{{ .Permalink }}">{{ .Title }}</a>
@@ -20,10 +18,12 @@
     {{ if gt $paginator.TotalPages 1 }}
     <nav class="pagination">
         {{ if $paginator.HasPrev }}
+        <i class="ri-arrow-left-line" style="color: var(--link-color);"></i>
         <a href="{{ $paginator.Prev.URL }}">Prev</a>
         {{ end }}
         {{ if $paginator.HasNext }}
         <a href="{{ $paginator.Next.URL }}">Next</a>
+        <i class="ri-arrow-right-line" style="color: var(--link-color);"></i>
         {{ end }}
         <br>
         <span>Page {{ $paginator.PageNumber }} of {{ $paginator.TotalPages }}</span>

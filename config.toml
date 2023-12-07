@@ -1,14 +1,14 @@
 baseURL = 'https://seiheki-demo.cicada000.work'               # 网站域名
 languageCode = 'en-us'                                        # 网页语言
 title = 'Seiheki Demo Site'                                   # 网站Title
-theme = 'seiheki'
-hasCJKLanguage = true
+theme = 'seiheki'                                             # 主题名称
+hasCJKLanguage = true                                         # 是否有CJK字符
 
 [params]
     subtitle = "This is a demo site."                         # 网站副标题
     favicon = "https://www.cicada000.work/favicon.png"        # 网站Favicon 
     fancybox = true                                           # 开启图片灯箱
-    paginate = 10
+    paginate = 10                                             # 每页文章数目
 
 [params.Umami]                                                # Umami网站数据统计
   webpanel = ""                                               # 统计网站面板，空值默认为官网
