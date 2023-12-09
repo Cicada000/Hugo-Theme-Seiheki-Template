@@ -1,6 +1,6 @@
 {{- $ogImage := .Params.image }} <!-- 尝试从文章的 front matter 中获取图片 -->
 {{- if not $ogImage }}
-    {{- $ogImage = "https://seiheki-demo.cicada000.work/about/og-image.png" }}
+    {{- $ogImage = "/about/og-image.png" }}
 {{- end }}
 
 <meta property="og:title" content="{{ .Title }}" />
