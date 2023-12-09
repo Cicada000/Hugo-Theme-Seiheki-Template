@@ -1,12 +1,12 @@
-{{- $image := .Params.image }}
-{{- if not $image }}
-    {{- $image = "default-image.jpg" }}
+{{- $ogImage := .Params.image }} <!-- 尝试从文章的 front matter 中获取图片 -->
+{{- if not $ogImage }}
+    {{- $ogImage = "https://seiheki-demo.cicada000.work/about/og-image.png" }}
 {{- end }}
 
 <meta property="og:title" content="{{ .Title }}" />
 <meta property="og:type" content="{{ if .IsHome }}website{{ else }}article{{ end }}" />
 <meta property="og:url" content="{{ .Permalink }}" />
-<meta property="og:image" content="{{ printf "%s%s" .Site.BaseURL $image }}" />
+<meta property="og:image" content="{{ printf "%s%s" .Site.BaseURL $ogImage }}" />
 <meta property="og:site_name" content="{{ .Site.Title }}" />
 
 {{- with .Description }}

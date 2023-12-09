@@ -10,3 +10,5 @@ menu:
 # About this site
 
 &emsp;&emsp;This is a demo website for hugo blog seiheki theme.
+
+![Image](og-image.png)
