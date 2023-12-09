@@ -1,6 +1,5 @@
 {{ define "main"}}
 <body>
-    <!-- 创建一个分页器对象，设置每页显示的文章数量 -->
     {{ $paginator := .Paginate (where .Site.RegularPages "Type" "post") .Site.Params.paginate }}
     {{ range $paginator.Pages }}
     <div class="index-post">

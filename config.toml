@@ -1,5 +1,5 @@
 baseURL = 'https://seiheki-demo.cicada000.work'               # 网站域名
-languageCode = 'en-us'                                        # 网页语言
+languageCode = 'zh-cn'                                        # 网页默认语言
 title = 'Seiheki Demo Site'                                   # 网站Title
 theme = 'seiheki'                                             # 主题名称
 hasCJKLanguage = true                                         # 是否有CJK字符
