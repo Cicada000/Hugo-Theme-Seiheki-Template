@@ -1,11 +1,11 @@
 baseURL = 'https://seiheki-demo.cicada000.work'               # 网站域名
-languageCode = 'zh-cn'                                        # 网页默认语言
-title = 'Seiheki Demo Site'                                   # 网站Title
+defaultContentLanguage = 'zh-cn'                              # 网页默认语言，目前支持zh-cn和en-us
+title = 'Seiheki Demo Site'                                   # 网站Title，请同步更改i18n文件夹下配置
 theme = 'seiheki'                                             # 主题名称
 hasCJKLanguage = true                                         # 是否有CJK字符
 
 [params]
-    subtitle = "This is a demo site."                         # 网站副标题
+    subtitle = "This is a demo site."                         # 网站副标题，请同步更改i18n文件夹下配置
     favicon = "https://www.cicada000.work/favicon.png"        # 网站Favicon 
     fancybox = true                                           # 开启图片灯箱
     paginate = 10                                             # 每页文章数目
