@@ -519,7 +519,7 @@ a span {
     color: var(--site-title-color);
     transition: all 0.5s;
 }
- 
+
 .copyright:hover {
     color: var(--body-background-color);
 }

@@ -34,3 +34,10 @@ hasCJKLanguage = true                                         # 是否有CJK字�
 [taxonomies]
   tag = "tags"
   category = "categories"
+
+[languages.zh-cn]
+  weight = 1
+  contentDir = "content/zh-cn"
+[languages.en-us]
+  weight = 2
+  contentDir = "content/en-us"
