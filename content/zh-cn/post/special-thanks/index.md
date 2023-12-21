@@ -1,9 +1,9 @@
 +++
 author = "Cicada000"
-title = "Special thanks"
+title = "特别感谢"
 slug = "special-thanks"
 date = "2023-09-01"
-description = "Thanks to those who have contributed to this theme."
+description = "感谢每一位为这个主题提供过帮助的人。"
 weight = "1"
 tags = [
     "markdown",

@@ -1,8 +1,8 @@
 +++
 author = "Cicada000"
-title = "Layout Display"
+title = "排版示例"
 date = "2023-11-19"
-description = "一些排版示例。"
+description = "一些Markdown渲染示例。"
 image = "test-image.png"
 tags = [
     "markdown",
@@ -17,7 +17,7 @@ categories = [
 
 # Markdown 测试文章
 
-欢迎使用这篇文章来测试您的Markdown渲染引擎！
+欢迎使用这篇文章来测试您的Markdown渲染引擎！点击这个[链接](https://github.com/Cicada000/Hugo-Theme-Seiheki-Template)可访问本主题的Github仓库。
 
 ## 标题
 

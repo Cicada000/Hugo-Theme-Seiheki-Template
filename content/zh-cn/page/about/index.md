@@ -1,14 +1,14 @@
 ---
-title: About
-description: Hugo, the world's fastest framework for building websites
+title: 关于
+description: 关于本站的一些信息。
 date: '2023-09-29'
 menu:
     main: 
         weight: 4
 ---
 
-# About this site
+# 关于本站
 
-&emsp;&emsp;This is a demo website for hugo blog seiheki theme.
+&emsp;&emsp;这个网站是Hugo博客Seiheki主题的演示网站。
 
 ![Image](Ultrawide.png)
