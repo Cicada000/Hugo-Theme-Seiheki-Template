@@ -25,6 +25,9 @@ html::-webkit-scrollbar { /* 隐藏滚动条 */
     --search-input-background-color: #cccccc;
     --tags-page-number-color: #b0b0b0;
     --menu-link-color: #31777a;
+    --language-switcher-option-background: #f8f8f8;
+    --language-switcher-option-background-checked: #e9e9e9;
+    --language-switcher-option-color: #333;
 }
 
 /*暗色模式*/
@@ -75,8 +78,8 @@ html::-webkit-scrollbar { /* 隐藏滚动条 */
     --timing: ease-in-out;
     transition: background-color var(--duration);
     animation: fadeInAnimation ease 1s;
-    animation-iteration-count: 1; 
-    animation-fill-mode: forwards; 
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
 }
 
 body{
@@ -526,4 +529,33 @@ a span {
 
 .more-meta {
     color: var(--tag-color);
+}
+
+select {
+    font-size: 16px;
+    font-family: "Noto Serif SC", sans-serif;
+    font-weight: 500;
+    color: var(--site-title-color);
+    background-color: var(--body-background-color);
+    border: 0px;
+    padding: 5px;
+    outline: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    --duration: 1s;
+    --timing: ease-in-out;
+    transition: background-color var(--duration);
+    animation: fadeInAnimation ease 1s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+
+#languageSwitcher option {
+    background-color: var(--language-switcher-option-background); /* 选项的背景颜色 */
+    color: var(--language-switcher-option-color); /* 选项的文字颜色 */
+}
+
+#languageSwitcher option:checked {
+    background-color: var(--language-switcher-option-background-checked); /* 被选中的选项的背景颜色 */
 }
