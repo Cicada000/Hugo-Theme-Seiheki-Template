@@ -14,7 +14,7 @@
                 {{ end }}
                 <br>
                 <i class="ri-eye-line" style="color: var(--tag-color);"></i>
-                <span class="more-meta"> {{ .ReadingTime  }} minute read</span>
+                <span class="more-meta"> {{ .ReadingTime  }} {{ i18n "reading-time" }}</span>
                 <br>
                 {{- partial "toc.html" . }}
                 {{.Content}}

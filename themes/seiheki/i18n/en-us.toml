@@ -2,4 +2,7 @@
   other = "Seheki Demo Site"
 
 [subtitle]
-    other= "This is a demo site."
+    other = "This is a demo site."
+
+[reading-time]
+  other = "minute read"
