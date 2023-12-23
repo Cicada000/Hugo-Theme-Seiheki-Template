@@ -15,7 +15,7 @@ categories = [
 ]
 +++
 
-# Markdown 测试文章
+# Markdown Test Passage
 
 Welcome to use this article to test your Markdown rendering engine! Click this [link](https://github.com/Cicada000/Hugo-Theme-Seiheki-Template) to access the Github repository for this theme.
 
@@ -70,7 +70,7 @@ Code Block：
 def bubbleSort(arr):
     n = len(arr)
  
-    # 遍历所有数组元素
+    # Iterate through all array elements
     for i in range(n):
  
         # Last i elements are already in place
@@ -83,7 +83,7 @@ arr = [64, 34, 25, 12, 22, 11, 90]
  
 bubbleSort(arr)
  
-print ("排序后的数组:")
+print ("sorted array:")
 for i in range(len(arr)):
     print ("%d" %arr[i])
 ```
