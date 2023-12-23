@@ -1,63 +1,5 @@
 <div class="title-block">
     <div class="site-title" onclick="window.open('{{ .Site.BaseURL }}','_self')">{{ i18n "title" }}</div>
-    <div style="float: right; margin-top: 5px;">
-        <i class="ri-translate-2"></i>
-        <select id="languageSwitcher">
-            <option value="zh-cn">中文</option>
-            <option value="en-us">English</option>
-        </select>
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                // 获取当前 URL 的路径部分
-                let path = window.location.pathname;
-
-                // 默认语言代码
-                const defaultLang = 'zh-cn'; // 从 Hugo 配置中获取
-
-                // 支持的语言列表
-                const supportedLangs = ['zh-cn', 'en-us']; // 根据需要添加更多语言
-
-                // 检查当前路径是否包含已知的语言代码
-                const currentLang = supportedLangs.find(lang => path.startsWith('/' + lang)) || defaultLang;
-
-                // 更新下拉菜单以反映当前语言
-                document.getElementById('languageSwitcher').value = currentLang;
-
-                // 切换语言的逻辑
-                document.getElementById('languageSwitcher').addEventListener('change', function() {
-                switchLanguage(this.value);
-                });
-            });
-            function switchLanguage(newLang) {
-                // 获取当前 URL 的路径部分
-                let path = window.location.pathname;
-            
-                // 默认语言代码
-                const defaultLang = 'zh-cn'; // 从 Hugo 配置中获取
-            
-                // 支持的语言列表
-                const supportedLangs = ['zh-cn', 'en-us']; // 根据需要添加更多语言
-            
-                // 检查当前路径是否包含已知的语言代码
-                const currentLang = supportedLangs.find(lang => path.startsWith('/' + lang));
-            
-                if (currentLang) {
-                    // 如果当前 URL 包含语言代码，则替换或删除该代码
-                    path = newLang === defaultLang ? path.replace('/' + currentLang, '') : path.replace('/' + currentLang, '/' + newLang);
-                } else if (newLang !== defaultLang) {
-                    // 如果当前 URL 不包含语言代码，并且所选语言不是默认语言，则添加语言代码
-                    path = '/' + newLang + path;
-                }
-
-                // 重定向到新的 URL
-                window.location.href = path;
-            }
-
-            document.getElementById('languageSwitcher').addEventListener('change', function() {
-                switchLanguage(this.value);
-            });
-        </script>          
-    </div>
     <br>
     <div class="site-subtitle">{{ i18n "subtitle" }}</div>
 </div>
@@ -69,6 +11,42 @@
             {{ range.Site.Menus.main }}
             <a href="{{ .URL | safeURL }}">{{ .Name }}</a>
             {{ end }}
+            <a>
+                <i class="ri-translate-2"></i>
+                <select id="languageSwitcher" class="lang_select">
+                    <option value="zh-cn">中文</option>
+                    <option value="en-us">English</option>
+                </select>
+                <script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        let path = window.location.pathname; // 获取当前 URL 的路径部分
+                        const defaultLang = 'zh-cn'; // 默认语言代码
+                        const supportedLangs = ['zh-cn', 'en-us']; // 根据需要添加更多语言
+                        const currentLang = supportedLangs.find(lang => path.startsWith('/' + lang)) || defaultLang; // 检查当前路径是否包含已知的语言代码
+                        document.getElementById('languageSwitcher').value = currentLang; // 更新下拉菜单以反映当前语言
+                        document.getElementById('languageSwitcher').addEventListener('change', function() { // 切换语言的逻辑
+                        switchLanguage(this.value);
+                        });
+                    });
+                    function switchLanguage(newLang) {
+                        let path = window.location.pathname; // 获取当前 URL 的路径部分
+                        const defaultLang = 'zh-cn'; // 默认语言代码
+                        const supportedLangs = ['zh-cn', 'en-us']; // 根据需要添加更多语言
+                        const currentLang = supportedLangs.find(lang => path.startsWith('/' + lang)); // 检查当前路径是否包含已知的语言代码
+                    
+                        if (currentLang) {
+                            path = newLang === defaultLang ? path.replace('/' + currentLang, '') : path.replace('/' + currentLang, '/' + newLang); // 如果当前 URL 包含语言代码，则替换或删除该代码
+                        } else if (newLang !== defaultLang) {
+                            path = '/' + newLang + path; // 如果当前 URL 不包含语言代码，并且所选语言不是默认语言，则添加语言代码
+                        }
+                        window.location.href = path; // 重定向到新的 URL
+                    }
+        
+                    document.getElementById('languageSwitcher').addEventListener('change', function() {
+                        switchLanguage(this.value);
+                    });
+                </script>
+            </a>
         </li>
     </ul>
     <label for="menu-button" class="menu-button">☰</label>

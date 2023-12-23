@@ -534,9 +534,9 @@ a span {
 select {
     font-size: 16px;
     font-family: "Noto Serif SC", sans-serif;
-    font-weight: 500;
-    color: var(--site-title-color);
-    background-color: var(--body-background-color);
+    font-weight: 700;
+    color: var(--menu-link-color);
+    background-color: transparent;
     border: 0px;
     padding: 5px;
     outline: none;

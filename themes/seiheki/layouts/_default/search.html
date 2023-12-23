@@ -3,8 +3,13 @@
     <ul id="search-results"></ul>
 
     <script>
+        // 获取当前语言代码
+        const languageCode = window.location.pathname.split('/')[1]; // 假设 URL 结构是 /zh-cn/some-page
+        const isDefaultLanguage = languageCode === 'zh-cn'; // 或者从 Hugo 配置中获取你的默认语言代码
+        const indexFile = isDefaultLanguage ? '/index.json' : `/${languageCode}/index.json`;
+
         // 获取索引数据
-        fetch('/index.json')
+        fetch(indexFile)
         .then(response => response.json())
         .then(data => {
             // 配置Fuse.js选项
