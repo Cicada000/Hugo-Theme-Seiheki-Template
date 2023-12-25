@@ -549,6 +549,11 @@ select {
     animation: fadeInAnimation ease 1s;
     animation-iteration-count: 1;
     animation-fill-mode: forwards;
+    transition: all 0.5s;
+}
+
+select:hover {
+    color: var(--body-background-color);
 }
 
 #languageSwitcher option {

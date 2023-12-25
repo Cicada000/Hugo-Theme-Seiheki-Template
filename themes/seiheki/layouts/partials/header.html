@@ -11,7 +11,7 @@
             {{ range.Site.Menus.main }}
             <a href="{{ .URL | safeURL }}">{{ .Name }}</a>
             {{ end }}
-            <a>
+            <a class="select">
                 <i class="ri-translate-2"></i>
                 <select id="languageSwitcher" class="lang_select">
                     <option value="zh-cn">中文</option>

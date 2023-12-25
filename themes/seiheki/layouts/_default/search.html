@@ -3,71 +3,67 @@
     <ul id="search-results"></ul>
 
     <script>
-        // 获取当前语言代码
-        const languageCode = window.location.pathname.split('/')[1]; // 假设 URL 结构是 /zh-cn/some-page
-        const isDefaultLanguage = languageCode === 'zh-cn'; // 或者从 Hugo 配置中获取你的默认语言代码
-        const indexFile = isDefaultLanguage ? '/index.json' : `/${languageCode}/index.json`;
-
-        // 获取索引数据
-        fetch(indexFile)
-        .then(response => response.json())
-        .then(data => {
-            // 配置Fuse.js选项
-            const options = {
-                keys: ['title', 'content'],
-                threshold: 0.2,
-                tokenize: true,
-                matchAllTokens: true,
-                findAllMatches: true,
-                ignoreLocation: true,
-                includeMatches: true
-            };
-            // 初始化Fuse.js
-            const fuse = new Fuse(data, options);
+        document.addEventListener('DOMContentLoaded', function() {
+            let path = window.location.pathname;
+            const defaultLang = 'zh-cn';
+            const supportedLangs = ['zh-cn', 'en-us'];
+            const currentLang = supportedLangs.find(lang => path.startsWith('/' + lang)) || defaultLang;
+            const indexFile = currentLang === defaultLang ? '/index.json' : `/${currentLang}/index.json`;
+            fetch(indexFile)
+            .then(response => response.json())
+            .then(data => {
+                const options = {
+                    keys: ['title', 'content'],
+                    threshold: 0.2,
+                    tokenize: true,
+                    matchAllTokens: true,
+                    findAllMatches: true,
+                    ignoreLocation: true,
+                    includeMatches: true
+                };
+                const fuse = new Fuse(data, options);
     
-            // 绑定输入框的事件监听器
-            document.getElementById('search-input').addEventListener('input', function() {
-                // 执行搜索
-                let results = fuse.search(this.value);
-                let searchResults = document.getElementById('search-results');
-                searchResults.innerHTML = '';
-                
-                // 为每个搜索结果创建一个列表项
-                results.forEach(result => {
-                    let item = document.createElement('li');
-                    let link = document.createElement('a');
-                    link.href = result.item.permalink;
-                    link.textContent = result.item.title;
-                    item.appendChild(link);
+                document.getElementById('search-input').addEventListener('input', function() {
+                    let results = fuse.search(this.value);
+                    let searchResults = document.getElementById('search-results');
+                    searchResults.innerHTML = '';
+                    
+                    results.forEach(result => {
+                        let item = document.createElement('li');
+                        let link = document.createElement('a');
+                        link.href = currentLang === defaultLang ? result.item.permalink : `/${currentLang}${result.item.permalink}`;
+                        link.textContent = result.item.title;
+                        item.appendChild(link);
     
-                    // 处理匹配到的片段
-                    if (result.matches && result.matches.length) {
-                        // 只处理第一个匹配项
-                        let firstMatch = result.matches[0]; // 假定按照相关性排序
-                        if (firstMatch.key === 'content') {
-                            // 先提取HTML中的纯文本
-                            let tempDiv = document.createElement('div');
-                            tempDiv.innerHTML = result.item.content;
-                            let plainTextContent = tempDiv.textContent || tempDiv.innerText;
+                        // 处理匹配到的片段
+                        if (result.matches && result.matches.length) {
+                            // 只处理第一个匹配项
+                            let firstMatch = result.matches[0]; // 假定按照相关性排序
+                            if (firstMatch.key === 'content') {
+                                // 先提取HTML中的纯文本
+                                let tempDiv = document.createElement('div');
+                                tempDiv.innerHTML = result.item.content;
+                                let plainTextContent = tempDiv.textContent || tempDiv.innerText;
     
-                            // 获取第一个匹配项的索引
-                            let [start, end] = firstMatch.indices[0];
-                            // 计算摘要的起始和结束索引
-                            let snippetStart = Math.max(start - 30, 0);
-                            let snippetEnd = Math.min(end + 30, plainTextContent.length);
-                            // 提取摘要文本
-                            let snippet = '... ' + plainTextContent.substring(snippetStart, snippetEnd) + ' ...';
-                            // 创建段落元素以显示摘要
-                            let snippetElem = document.createElement('p');
-                            snippetElem.textContent = snippet;
-                            item.appendChild(snippetElem);
+                                // 获取第一个匹配项的索引
+                                let [start, end] = firstMatch.indices[0];
+                                // 计算摘要的起始和结束索引
+                                let snippetStart = Math.max(start - 30, 0);
+                                let snippetEnd = Math.min(end + 30, plainTextContent.length);
+                                // 提取摘要文本
+                                let snippet = '... ' + plainTextContent.substring(snippetStart, snippetEnd) + ' ...';
+                                // 创建段落元素以显示摘要
+                                let snippetElem = document.createElement('p');
+                                snippetElem.textContent = snippet;
+                                item.appendChild(snippetElem);
+                            }
                         }
-                    }
     
-                    // 将列表项添加到搜索结果中
-                    searchResults.appendChild(item);
+                        // 将列表项添加到搜索结果中
+                        searchResults.appendChild(item);
+                    });
                 });
             });
         });
-    </script>
+    </script>    
 {{ end }}
