@@ -16,12 +16,12 @@
     {{ if gt $paginator.TotalPages 1 }}
     <nav class="pagination">
         {{ if $paginator.HasPrev }}
-        <i class="ri-arrow-left-line" style="color: var(--link-color);"></i>
+        <i class="ri-arrow-left-line page-arrow"></i>
         <a href="{{ $paginator.Prev.URL }}">Prev</a>
         {{ end }}
         {{ if $paginator.HasNext }}
         <a href="{{ $paginator.Next.URL }}">Next</a>
-        <i class="ri-arrow-right-line" style="color: var(--link-color);"></i>
+        <i class="ri-arrow-right-line page-arrow"></i>
         {{ end }}
         <br>
         <span>Page {{ $paginator.PageNumber }} of {{ $paginator.TotalPages }}</span>

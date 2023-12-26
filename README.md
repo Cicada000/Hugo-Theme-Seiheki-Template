@@ -11,7 +11,7 @@
 
 - [x] Archives页面
 - [x] Tags页面
-- [ ] Search页面
+- [x] Search页面
 - [x] CSS美化
 - [x] 图片灯箱
 - [x] TOC显示

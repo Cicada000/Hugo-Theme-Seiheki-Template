@@ -506,6 +506,10 @@ a span {
     vertical-align: top;
 }
 
+.page-arrow {
+    color: var(--link-color);
+}
+
 /* 页脚一言样式 */
 #onetext {
     font-size: 16px;
