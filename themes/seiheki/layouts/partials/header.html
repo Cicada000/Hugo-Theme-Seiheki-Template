@@ -1,7 +1,15 @@
 <div class="title-block">
-    <div class="site-title" onclick="window.open('{{ .Site.BaseURL }}','_self')">{{ i18n "title" }}</div>
+    <div class="site-title" onclick="goToHomepage()">{{ i18n "title" }}</div>
     <br>
     <div class="site-subtitle">{{ i18n "subtitle" }}</div>
+    <script>
+        function goToHomepage() {
+        const defaultLang = '{{ .Site.Params.defaultContentLanguage }}';
+        const currentLang = '{{ .Site.Language.Lang }}';
+        const homepageUrl = currentLang === defaultLang ? '{{ .Site.BaseURL }}' : '{{ .Site.BaseURL }}' + currentLang + '/';
+        window.location.href = homepageUrl;
+        }
+    </script>      
 </div>
 <br>
 <div>

@@ -557,8 +557,8 @@ select:hover {
 }
 
 #languageSwitcher option {
-    background-color: var(--language-switcher-option-background); /* 选项的背景颜色 */
-    color: var(--language-switcher-option-color); /* 选项的文字颜色 */
+    background-color: var(--language-switcher-option-background);
+    color: var(--language-switcher-option-color);
 }
 
 #languageSwitcher option:checked {

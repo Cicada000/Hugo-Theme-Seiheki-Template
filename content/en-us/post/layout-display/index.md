@@ -36,7 +36,7 @@ Normal paragraph text is simply rendered.
 
 **bold text** or __bold text__
 
-***bold italic text*** 或 ___bold italic text___
+***bold italic text*** or ___bold italic text___
 
 ## List
 
