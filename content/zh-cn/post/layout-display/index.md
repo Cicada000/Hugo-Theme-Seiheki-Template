@@ -15,6 +15,8 @@ categories = [
 ]
 +++
 
+<center>{{< aplayer server="netease" type="song" id="518894020" >}}</center>
+
 # Markdown 测试文章
 
 欢迎使用这篇文章来测试您的Markdown渲染引擎！点击这个[链接](https://github.com/Cicada000/Hugo-Theme-Seiheki-Template)可访问本主题的Github仓库。

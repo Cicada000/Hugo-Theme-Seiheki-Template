@@ -1,0 +1,19 @@
+<div style="max-width:600px;">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+
+    {{ $server := .Get "server" }}
+    {{ $type := .Get "type" }}
+    {{ $id := .Get "id" }}
+
+    {{ if eq $server "" }}{{ $server = "netease" }}{{ end }}
+    {{ if eq $type "" }}{{ $type = "song" }}{{ end }}
+    {{ if eq $id "" }}{{ $id = "默认的歌曲ID" }}{{ end }}
+
+    <meting-js
+        server="{{ $server }}"
+        type="{{ $type }}"
+        id="{{ $id }}">
+    </meting-js>
+</div>
