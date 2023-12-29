@@ -31,7 +31,7 @@
                     results.forEach(result => {
                         let item = document.createElement('li');
                         let link = document.createElement('a');
-                        link.href = currentLang === defaultLang ? result.item.permalink : `/${currentLang}${result.item.permalink}`;
+                        link.href = result.item.permalink;
                         link.textContent = result.item.title;
                         item.appendChild(link);
     
