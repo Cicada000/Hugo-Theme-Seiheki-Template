@@ -6,7 +6,7 @@
         function goToHomepage() {
         const defaultLang = '{{ .Site.Params.defaultContentLanguage }}';
         const currentLang = '{{ .Site.Language.Lang }}';
-        const homepageUrl = currentLang === defaultLang ? '{{ .Site.BaseURL }}' : '{{ .Site.BaseURL }}' + currentLang + '/';
+        const homepageUrl = currentLang === defaultLang ? '{{ .Site.BaseURL }}' : '{{ .Site.BaseURL }}' + '/' + currentLang + '/';
         window.location.href = homepageUrl;
         }
     </script>      
