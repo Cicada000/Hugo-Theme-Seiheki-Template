@@ -3,7 +3,7 @@
 <meta property="og:url" content="{{ .Permalink }}" />
 {{- $ogImage := .Params.image }}
 {{- if not $ogImage }}
-{{- $ogImage = "/about/og-image.png" }}
+{{- $ogImage = "/en-us/about/og-image.png" }}
 <meta property="og:image" content="{{ printf "%s%s" .Site.BaseURL $ogImage }}" />
 {{- else}}
 <meta property="og:image" content="{{ printf "%s%s" $.Permalink $ogImage }}" />
