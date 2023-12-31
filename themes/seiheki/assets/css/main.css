@@ -357,9 +357,18 @@ th {
 }
 
 .post-title{
+    display: inline-block;
+    width: auto;
+    height: auto;
     color: var(--table-border-color);
     font-size: 30px;
     font-weight: 900;
+    transition: all 0.5s;
+}
+
+.post-title:hover{
+    color: var(--body-background-color);
+    background-color: var(--site-title-color-hover);
 }
 
 .post-date{

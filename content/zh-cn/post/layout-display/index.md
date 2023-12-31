@@ -15,8 +15,6 @@ categories = [
 ]
 +++
 
-<center>{{< aplayer server="netease" type="song" id="518894020" >}}</center>
-
 # Markdown 测试文章
 
 欢迎使用这篇文章来测试您的Markdown渲染引擎！点击这个[链接](https://github.com/Cicada000/Hugo-Theme-Seiheki-Template)可访问本主题的Github仓库。
@@ -117,3 +115,5 @@ for i in range(len(arr)):
 ![TestImage](https://via.placeholder.com/150)
 
 ![TestImage](https://via.placeholder.com/500)
+
+![LinkImageTest](https://img.cicada000.work/-65271da64549bbae.jpg)

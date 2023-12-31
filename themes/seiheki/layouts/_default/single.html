@@ -2,7 +2,8 @@
     <body>
         <div id="post" class="post">
             <article>
-                <h1 class="post-title">{{ .Title }}</h1>
+                <h1 class="post-title" onclick="javascript:location.reload();">{{ .Title }}</h1>
+                <br>
                 <i class="ri-time-line" style="color: var(--tag-color);"></i>
                 <a class="up-time" href="{{ "/archives/" }}">{{ dateFormat "2006.01.02" .Date }}</a>
                 {{ if .Params.tags }}
