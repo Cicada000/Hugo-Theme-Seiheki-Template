@@ -2,6 +2,29 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
     <script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+    <style>
+        .aplayer-title {
+            color: var(--site-title-color-hover);
+        }
+        .aplayer-author {
+            color: var(--site-title-color-hover) !important;
+        }
+        .aplayer-lrc-current {
+            color: var(--site-title-color) !important;
+        }
+        p {
+            color: var(--text-color) !important;
+        }
+        .aplayer-info {
+            background-color: var(--search-input-background-color);
+        }
+        .aplayer .aplayer-lrc:before {
+            background: none;
+        }
+        .aplayer .aplayer-lrc:after {
+            background: none;
+        }
+    </style>
 
     {{ $server := .Get "server" }}
     {{ $type := .Get "type" }}
