@@ -2,6 +2,7 @@
 title: 关于
 description: 关于本站的一些信息。
 date: '2023-09-29'
+slug: about
 menu:
     main: 
         weight: 4
