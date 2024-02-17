@@ -6,6 +6,7 @@ menu:
         params:
             icon: link
 
+slug: links
 comments: false
 ---
 这里将放置一些友链。

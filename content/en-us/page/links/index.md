@@ -6,6 +6,7 @@ menu:
         params:
             icon: link
 
+slug: links
 comments: false
 ---
 
