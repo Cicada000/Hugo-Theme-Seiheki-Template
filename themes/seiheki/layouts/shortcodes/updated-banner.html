@@ -1,0 +1,23 @@
+{{ $publishDate := .Page.Date }}
+{{ $currentDate := now }}
+{{ $daysSincePublished := div (sub $currentDate.Unix $publishDate.Unix) 86400 }}
+{{ $daysThreshold := .Get "day" | default "180" | int }}
+
+<style>
+    .updated-banner {
+        background-color: rgba(255, 166, 0, 0.365);
+        border: 2px solid rgb(255, 174, 0);
+        color: var(--site-title-color);
+        padding: 10px;
+        border-radius: 2px;
+        margin: 20px auto;
+        max-width: 500px;
+        text-align: center;
+    }
+</style>
+
+{{ if gt $daysSincePublished $daysThreshold }}
+<div class="updated-banner">
+    注意：本文最后更新于 {{ dateFormat "2006-01-02" $publishDate }}，文中内容可能已过时。
+</div>
+{{ end }}
