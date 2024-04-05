@@ -1,0 +1,54 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<style>
+    .custom-banner {
+    border: 2px solid;
+    border-radius: 2px;
+    margin: 20px auto;
+    overflow: hidden;
+    }
+
+    .banner-top {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    }
+
+    .banner-bottom {
+    padding: 10px;
+    background-color: transparent;
+    }
+
+    .material-icons {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;  /* Preferred icon size */
+    display: inline-block;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: 'liga';
+    }
+
+</style>
+
+<div class="custom-banner" style='border-color: {{ .Get "border" }};'>
+    <div class="banner-top" style='background-color: {{ .Get "background" }};'>
+        <span class="material-icons">
+            {{ .Get "icon" }}
+        </span>
+        {{ .Get "top" }}
+    </div>
+    <div class="banner-bottom">
+        {{ .Get "bottom" }}
+    </div>
+</div>  
