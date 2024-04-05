@@ -24,6 +24,18 @@
 - [x] 404页面完善
 - [x] 来点有意思的Shortcode
 
+## 主题使用
+
+### Vercel一键部署
+
+&emsp;&emsp;克隆本仓库并按照下文调整配置，可直接在Vercel部署。
+
+&emsp;&emsp;[![Powered by Vercel](https://www.datocms-assets.com/31049/1618983297-powered-by-vercel.svg)](https://vercel.com/new/clone?repository-url=https://github.com/Cicada000/Hugo-Theme-Seiheki-Template)
+
+### 常规配置
+
+&emsp;&emsp;下载Releases页面的压缩包，将解压后的文件夹放至博客的主题文件夹下并进行相应的配置。
+
 ## 主题配置
 
 ### 基本配置
