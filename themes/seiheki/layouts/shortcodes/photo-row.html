@@ -1,0 +1,46 @@
+<style>
+    .photo-row {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px; /* Adjust this value to set your desired gap */
+    }
+
+    .photo-item {
+        flex: 1; /* This will allow each .photo-item to grow and take up equal space */
+        /* Add padding to create space around the image if desired */
+        padding: 5px; /* This padding will ensure there's space around images */
+    }
+
+    .photo-item img {
+        display: block;
+        max-height: 500px;
+        max-width: 100%; /* This will ensure the image is responsive and fits its container */
+        height: auto;
+        width: auto; /* Keep width auto to maintain aspect ratio */
+    }
+
+    a:hover {
+        background-color: transparent;
+    }
+
+</style>
+
+<script>
+    $('[data-fancybox="gallery"]').fancybox({
+    });
+
+</script>
+
+<div class="photo-row">
+    {{ range (split .Inner "\n") }}
+        {{ $image_url := trim . "\r\n\t " }}
+        {{ if ne $image_url "" }}
+            <a href="{{ $image_url | safeURL }}" data-fancybox="gallery" class="photo-item">
+                <img src="{{ $image_url | safeURL }}" alt="Photo" style="max-height: 500px; height: auto; width: auto;">
+            </a>
+        {{ end }}
+    {{ end }}
+</div>
+
+
