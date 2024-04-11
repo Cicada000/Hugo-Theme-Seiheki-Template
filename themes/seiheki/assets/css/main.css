@@ -483,6 +483,7 @@ h6{
 
 img {
     max-width: 65%;
+    max-height: 500px;
     height: auto;
     text-align: center;
     display: block;
