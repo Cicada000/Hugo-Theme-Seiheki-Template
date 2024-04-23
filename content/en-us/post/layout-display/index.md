@@ -110,6 +110,16 @@ Centered table
 
 </center>
 
+## TeX Support
+
+$$ e^{ i \pi}+1=0 $$
+
+$$
+\bbox[5px, border:2px solid #268785]{
+    e^x=\lim_{n\to\infty} \left( 1+\frac{x}{n} \right)^n
+}
+$$
+
 ## Picture
 
 ![TestImage](https://via.placeholder.com/150)
