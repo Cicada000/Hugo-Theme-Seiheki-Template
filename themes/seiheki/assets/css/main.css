@@ -161,7 +161,7 @@ a:hover {
 .menu {
     display: flex;
     list-style: none;
-    margin: -10px 0 -10px -10px;
+    margin: -10px 0 -10px 0px;
     padding: 0;
 }
 
@@ -170,6 +170,7 @@ a:hover {
     text-align: left;
     background-color: transparent;
     padding: 10px;
+    margin-left: -10px;
 }
 
 /* 定义菜单项的链接的样式 */
