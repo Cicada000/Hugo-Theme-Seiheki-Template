@@ -115,7 +115,7 @@ for i in range(len(arr)):
 $$ e^{ i \pi}+1=0 $$
 
 $$
-\bbox[black, 5px, border:2px solid #268785]{
+\bbox[5px, border:2px solid #268785]{
     e^x=\lim_{n\to\infty} \left( 1+\frac{x}{n} \right)^n
 }
 $$
