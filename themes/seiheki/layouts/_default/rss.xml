@@ -33,6 +33,9 @@
             <pubDate>{{ .Date.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</pubDate>
             <guid>{{ .Permalink }}</guid>
             <description>{{ .Content | html }}</description>
+            {{ if .Site.Params.showRssHint }}
+                <rssHint>您正在阅读的是RSS版本的文章，可移步至网页以获取最佳体验。</rssHint>
+            {{ end }}
         </item>
         {{ end }}
     </channel>

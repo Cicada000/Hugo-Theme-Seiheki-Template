@@ -9,6 +9,7 @@ hasCJKLanguage = true                                         # 是否有CJK字�
     favicon = "https://www.cicada000.work/favicon.png"        # 网站Favicon 
     fancybox = true                                           # 开启图片灯箱
     paginate = 10                                             # 每页文章数目
+    showRssHint = true                                        # 是否开启RSS提示
 
 [params.Umami]                                                # Umami网站数据统计
   webpanel = ""                                               # 统计网站面板，空值默认为官网
