@@ -37,7 +37,7 @@
         let headers = document.querySelectorAll('h1, h2');
         let tocLinks = toc.querySelectorAll('a');
         let lastIntersecting = null;
-    
+
         headers.forEach(header => {
             let observer = new IntersectionObserver(entries => {
                 entries.forEach(entry => {
@@ -64,9 +64,26 @@
                 rootMargin: "-1% 0px -99% 0px",
                 threshold: 0
             });
-    
+
             observer.observe(header);
+        });
+
+        tocLinks.forEach(link => {
+            link.addEventListener('click', function(event) {
+                event.preventDefault(); // 防止默认的跳转行为
+                const targetId = decodeURIComponent(this.getAttribute('href')); // 解码 href
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    const targetPosition = targetElement.getBoundingClientRect().top + window.scrollY;
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth' // 添加平滑滚动效果
+                    });
+                }
+            });
         });
     });
 </script>
+
 {{ end }}
