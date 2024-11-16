@@ -1,13 +1,13 @@
 <meta property="og:title" content="{{ .Title }}" />
 <meta property="og:type" content="{{ if .IsHome }}website{{ else }}article{{ end }}" />
 <meta property="og:url" content="{{ .Permalink }}" />
+
 {{- $ogImage := .Params.image }}
 {{- if not $ogImage }}
-{{- $ogImage = "/en-us/about/og-image.png" }}
-<meta property="og:image" content="{{ printf "%s%s" .Site.BaseURL $ogImage }}" />
-{{- else}}
-<meta property="og:image" content="{{ printf "%s%s" $.Permalink $ogImage }}" />
+    {{- $ogImage = "/en-us/about/og-image.png" }}
 {{- end }}
+<meta property="og:image" content="{{ $ogImage }}" />
+
 <meta property="og:site_name" content="{{ .Site.Title }}" />
 
 {{- with .Description }}
