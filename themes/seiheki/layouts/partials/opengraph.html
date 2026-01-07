@@ -3,8 +3,14 @@
 <meta property="og:url" content="{{ .Permalink }}" />
 
 {{- $ogImage := .Params.image }}
-{{- if not $ogImage }}
-    {{- $ogImage = "/en-us/about/og-image.png" }}
+{{- if $ogImage }}
+    {{- with .Resources.GetMatch $ogImage }}
+        {{- $ogImage = .Permalink }}
+    {{- else }}
+        {{- $ogImage = $ogImage | absURL }}
+    {{- end }}
+{{- else }}
+    {{- $ogImage = "/en-us/about/og-image.png" | absURL }}
 {{- end }}
 <meta property="og:image" content="{{ $ogImage }}" />
 
