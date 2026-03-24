@@ -119,6 +119,7 @@ body{
     font-size: 2rem;
     color: var(--site-title-color);
     transition: all 0.5s;
+    cursor: pointer;
 }
 
 .site-title:hover {
@@ -161,7 +162,7 @@ a:hover {
 .menu {
     display: flex;
     list-style: none;
-    margin: 0;
+    margin: -10px 0 -10px -10px;
     padding: 0;
 }
 
@@ -169,21 +170,21 @@ a:hover {
 .menu li {
     text-align: left;
     background-color: transparent;
-    padding: 0;
+    padding: 10px;
 }
 
 /* 定义菜单项的链接的样式 */
 .menu li a {
-    display: block;
-    padding: 10px 15px;
     text-decoration: none;
     color: var(--menu-link-color);
+    margin-right: 15px;
     transition: all 0.5s ease-in-out;
 }
 
+/* 语言选择器基础样式（支持点击区域扩大） */
 .menu li a.select {
     position: relative;
-    display: flex;
+    display: inline-flex;
     align-items: center;
 }
 
@@ -193,14 +194,12 @@ a:hover {
     color: var(--menu-link-color);
     font-size: 16px;
     font-weight: 700;
-    background-color: transparent;
     transition: color 0.5s ease-in-out;
 }
 
 .menu li a.select i {
     margin-right: 5px;
     font-size: 18px;
-    display: inline-block;
 }
 
 .lang_select {
@@ -219,7 +218,7 @@ a:hover {
 }
 
 .menu li a:hover {
-    background-color: var(--link-color-hover);
+    background-color: var(--menu-link-color);
     color: var(--body-background-color);
 }
 
@@ -265,7 +264,7 @@ a:hover {
     background-color: transparent;
 }
 
-/* 使用媒体查询在网页宽度小于600px时改变菜单的样式 */
+/* 移动端菜单样式 */
 @media screen and (max-width: 720px) {
 
     .menu {
@@ -290,27 +289,23 @@ a:hover {
         width: 100%;
         line-height: 50px;
         box-sizing: border-box;
-        opacity: 0;
-        visibility: hidden;
-        transition: opacity 0.5s ease-in-out, visibility 0.5s;
+        margin-left: 0;
     }
 
     .menu li a {
         display: block;
         width: 100%;
         height: 50px;
-        line-height: 50px;
-        padding: 0;
+        margin-right: 0;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.5s ease-in-out, visibility 0.5s, background-color 0.5s, color 0.5s;
     }
 
     .menu li a.select {
         display: flex;
         justify-content: center;
         align-items: center;
-    }
-
-    .menu li a.select i {
-        margin-right: 5px;
     }
 
     .menu li a:hover {
@@ -324,13 +319,6 @@ a:hover {
         color: var(--body-background-color);
     }
 
-    .lang_select {
-        cursor: pointer;
-        text-align-last: center;
-        padding: 0;
-        margin: 0;
-    }
-
     /* 显示菜单的按钮 */
     .menu-button {
         background-color: transparent;
@@ -339,7 +327,7 @@ a:hover {
     }
 
     /* 当菜单的按钮被点击时，显示所有的菜单项 */
-    .menu-button:checked ~ .menu li {
+    .menu-button:checked ~ .menu li a {
         opacity: 1;
         visibility: visible;
     }

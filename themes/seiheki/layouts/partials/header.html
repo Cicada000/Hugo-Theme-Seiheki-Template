@@ -26,41 +26,43 @@
                     <option value="zh-cn">中文</option>
                     <option value="en-us">English</option>
                 </select>
-                <script>
-                    document.addEventListener('DOMContentLoaded', function() {
-                        let path = window.location.pathname;
-                        const defaultLang = 'zh-cn';
-                        const supportedLangs = ['zh-cn', 'en-us'];
-                        const currentLang = supportedLangs.find(lang => path.startsWith('/' + lang)) || defaultLang;
-                        
-                        const switcher = document.getElementById('languageSwitcher');
-                        const display = document.getElementById('languageDisplay');
-                        
-                        switcher.value = currentLang;
-                        display.innerText = switcher.options[switcher.selectedIndex].text;
-
-                        switcher.addEventListener('change', function() {
-                            display.innerText = this.options[this.selectedIndex].text;
-                            switchLanguage(this.value);
-                        });
-                    });
-                    
-                    function switchLanguage(newLang) {
-                        let path = window.location.pathname;
-                        const defaultLang = 'zh-cn';
-                        const supportedLangs = ['zh-cn', 'en-us'];
-                        const currentLang = supportedLangs.find(lang => path.startsWith('/' + lang));
-                    
-                        if (currentLang) {
-                            path = newLang === defaultLang ? path.replace('/' + currentLang, '') : path.replace('/' + currentLang, '/' + newLang);
-                        } else if (newLang !== defaultLang) {
-                            path = '/' + newLang + path;
-                        }
-                        window.location.href = path;
-                    }
-                </script>
             </a>
         </li>
     </ul>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            let path = window.location.pathname;
+            const defaultLang = 'zh-cn';
+            const supportedLangs = ['zh-cn', 'en-us'];
+            const currentLang = supportedLangs.find(lang => path.startsWith('/' + lang)) || defaultLang;
+            
+            const switcher = document.getElementById('languageSwitcher');
+            const display = document.getElementById('languageDisplay');
+            
+            if (switcher && display) {
+                switcher.value = currentLang;
+                display.innerText = switcher.options[switcher.selectedIndex].text;
+
+                switcher.addEventListener('change', function() {
+                    display.innerText = this.options[this.selectedIndex].text;
+                    switchLanguage(this.value);
+                });
+            }
+        });
+        
+        function switchLanguage(newLang) {
+            let path = window.location.pathname;
+            const defaultLang = 'zh-cn';
+            const supportedLangs = ['zh-cn', 'en-us'];
+            const currentLang = supportedLangs.find(lang => path.startsWith('/' + lang));
+        
+            if (currentLang) {
+                path = newLang === defaultLang ? path.replace('/' + currentLang, '') : path.replace('/' + currentLang, '/' + newLang);
+            } else if (newLang !== defaultLang) {
+                path = '/' + newLang + path;
+            }
+            window.location.href = path;
+        }
+    </script>
     <label for="menu-button" class="menu-button">☰</label>
 </div>
