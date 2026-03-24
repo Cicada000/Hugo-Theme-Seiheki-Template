@@ -161,7 +161,7 @@ a:hover {
 .menu {
     display: flex;
     list-style: none;
-    margin: -10px 0 -10px 0px;
+    margin: 0;
     padding: 0;
 }
 
@@ -169,19 +169,63 @@ a:hover {
 .menu li {
     text-align: left;
     background-color: transparent;
-    padding: 10px;
-    margin-left: -10px;
+    padding: 0;
 }
 
 /* 定义菜单项的链接的样式 */
 .menu li a {
+    display: block;
+    padding: 10px 15px;
     text-decoration: none;
     color: var(--menu-link-color);
-    margin-right: 15px;
+    transition: all 0.5s ease-in-out;
+}
+
+.menu li a.select {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.menu li a.select i,
+.menu li a.select i::before,
+#languageDisplay {
+    color: var(--menu-link-color);
+    font-size: 16px;
+    font-weight: 700;
+    background-color: transparent;
+    transition: color 0.5s ease-in-out;
+}
+
+.menu li a.select i {
+    margin-right: 5px;
+    font-size: 18px;
+    display: inline-block;
+}
+
+.lang_select {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    color: transparent;
+    background: transparent;
+    cursor: pointer;
+    border: none;
+    -webkit-appearance: none;
+    z-index: 2;
 }
 
 .menu li a:hover {
-    background-color: var(--menu-link-color);
+    background-color: var(--link-color-hover);
+    color: var(--body-background-color);
+}
+
+.menu li a:hover i,
+.menu li a:hover i::before,
+.menu li a:hover #languageDisplay {
     color: var(--body-background-color);
 }
 
@@ -232,7 +276,7 @@ a:hover {
         padding: 0;
         max-height: 0;
         overflow: hidden;
-        transition: 1s ease-in-out;
+        transition: max-height 1s ease-in-out;
     }
 
     .menu-button:checked ~ .menu {
@@ -240,24 +284,51 @@ a:hover {
     }
 
     .menu li {
-        display: none;
         text-align: center;
         background-color: transparent;
         padding: 10px;
         width: 100%;
         line-height: 50px;
         box-sizing: border-box;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.5s ease-in-out, visibility 0.5s;
     }
 
     .menu li a {
         display: block;
         width: 100%;
         height: 50px;
+        line-height: 50px;
+        padding: 0;
+    }
+
+    .menu li a.select {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .menu li a.select i {
+        margin-right: 5px;
     }
 
     .menu li a:hover {
-        background-color: var(--body-background-color);
-        color: var(--link-color-hover);
+        background-color: var(--link-color-hover);
+        color: var(--body-background-color);
+    }
+
+    .menu li a:hover i,
+    .menu li a:hover i::before,
+    .menu li a:hover #languageDisplay {
+        color: var(--body-background-color);
+    }
+
+    .lang_select {
+        cursor: pointer;
+        text-align-last: center;
+        padding: 0;
+        margin: 0;
     }
 
     /* 显示菜单的按钮 */
@@ -267,15 +338,10 @@ a:hover {
         margin-top: 5px;
     }
 
-    @keyframes fadeIn {
-        from { opacity: 0; }
-        to { opacity: 1; }
-    }
-
     /* 当菜单的按钮被点击时，显示所有的菜单项 */
     .menu-button:checked ~ .menu li {
-        display: block;
-        animation: fadeIn 1s ease-in-out;
+        opacity: 1;
+        visibility: visible;
     }
 }
 
@@ -544,31 +610,6 @@ a span {
 
 .more-meta {
     color: var(--tag-color);
-}
-
-select {
-    font-size: 16px;
-    font-family: "Noto Serif SC", sans-serif;
-    font-weight: 700;
-    color: var(--menu-link-color);
-    background-color: transparent;
-    border: 0px;
-    padding: 5px;
-    outline: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    --duration: 1s;
-    --timing: ease-in-out;
-    transition: background-color var(--duration);
-    animation: fadeInAnimation ease 1s;
-    animation-iteration-count: 1;
-    animation-fill-mode: forwards;
-    transition: all 0.5s;
-}
-
-select:hover {
-    color: var(--body-background-color);
 }
 
 #languageSwitcher option {
