@@ -1,127 +1,131 @@
 +++
 author = "Cicada000"
-title = "Typography example"
+title = "Typography Showcase"
 date = "2023-11-19"
-description = "Some Markdown rendering examples."
+description = "A comprehensive demonstration of Markdown rendering, including titles, blockquotes, code, and custom shortcodes."
 image = "test-image.png"
 tags = [
     "markdown",
-    "css",
-    "html",
+    "typography",
+    "demo",
     "themes",
 ]
 categories = [
-    "themes"
+    "showcase"
 ]
 +++
 
-# Markdown Test Passage
+# Welcome to Seiheki
 
-Welcome to use this article to test your Markdown rendering engine! Click this [link](https://github.com/Cicada000/Hugo-Theme-Seiheki-Template) to access the Github repository for this theme.
+Seiheki is a Hugo theme designed for writers who appreciate minimalist design and professional typography. This page serves as a comprehensive test of all supported Markdown elements and custom shortcodes.
 
-## Heading
+## The Art of Typography
 
-# First level title
-## Second level title
-### Level 3 heading
-#### Level 4 heading
-##### Level 5 heading
-###### Level 6 heading
+### Paragraphs and Spacing
 
-## Paragraphs and emphasis
+Typography is the craft of endowing a human language with a durable visual form. As Robert Bringhurst famously wrote: "Typography must often draw attention to itself before it can be read." In Seiheki, we prioritize a comfortable reading experience with optimized line-height and letter-spacing.
 
-Normal paragraph text is simply rendered.
-
-*italicized text* or _italicized text_
-
-**bold text** or __bold text__
-
-***bold italic text*** or ___bold italic text___
-
-## List
-
-Unordered list:
-
-- item 1
-- item 2
-  - Sub-item 2.1
-  - Sub-item 2.2
-
-Ordered list：
-
-1. First item
-2. Second item
-   1. Sub-item 2.1
-   2. Sub-item 2.2
-
-## Quote
-
-> This is a quoted passage.
+> "A good writer should be a good reader, and a good reader should be a good critic."
 >
-> Quotes can have multiple paragraphs.
+> Blockquotes in Seiheki are designed with a subtle accent border and soft background, making them stand out while maintaining overall visual harmony.
 
-## Code
+### Emphasis and Styling
 
-`inline code`
+Use **bold text** to highlight key points or *italic text* for emphasis. For outdated information, ~~strikethrough text~~ is available. Technical terms like `inline code` are also elegantly supported.
 
-Code Block：
+---
 
-```python
-def bubbleSort(arr):
-    n = len(arr)
- 
-    # Iterate through all array elements
-    for i in range(n):
- 
-        # Last i elements are already in place
-        for j in range(0, n-i-1):
- 
-            if arr[j] > arr[j+1] :
-                arr[j], arr[j+1] = arr[j+1], arr[j]
- 
-arr = [64, 34, 25, 12, 22, 11, 90]
- 
-bubbleSort(arr)
- 
-print ("sorted array:")
-for i in range(len(arr)):
-    print ("%d" %arr[i])
+## Navigation & TOC Test
+
+The Table of Contents (TOC) on the right sidebar will automatically highlight your current reading progress as you scroll through this article.
+
+### Section A: Scrolling Test
+This section contains placeholder text to increase the page height and test the TOC scrollspy feature.
+
+### Section B: Dynamic Highlighting
+Seiheki supports smooth scrolling and dynamic TOC highlighting. Click on any item in the sidebar to jump directly to that section.
+
+---
+
+## Lists and Interactions
+
+### Getting Started
+1. **Prerequisite**: Install Hugo on your machine.
+2. **Setup**: Clone the Seiheki theme repository.
+3. **Write**: Create your first content file under `content/`.
+   - Configure your `config.toml` properly.
+   - Add a high-quality cover image.
+
+### Features Checklist
+- Minimalist and Clean Design
+- Full Responsive Layout
+- Optimized Multilingual Support
+- Smooth Mobile Navigation
+
+---
+
+## Powerful Features
+
+### Code Highlighting
+
+Seiheki provides elegant code blocks with syntax highlighting and line numbers.
+
+```javascript
+function greet(name) {
+    console.log(`Hello, ${name}! Welcome to Seiheki.`);
+}
+
+// Example usage
+greet("World");
 ```
 
-## Table
+### Custom Shortcodes
 
-| Left-aligned title | Center-aligned title | Right-aligned title |
-|:----------------|:-------------:|----------------:|
-| Left-aligned text | Center-aligned text | Right-aligned text |
-| Text line 2 | More content | More content |
-| Text line 3 | More content | More content |
+{{< banner icon="warning" border="#FFAE00" background="#ffa6005c" top="Warning" bottom="This is a test message" >}}
 
-<br>
+### Mathematics (LaTeX)
 
-<center>
-
-Centered table
-
-| Left-aligned title | Center-aligned title | Right-aligned title |
-|:----------------|:-------------:|----------------:|
-| Left-aligned text | Center-aligned text | Right-aligned text |
-| Text line 2 | More content | More content |
-| Text line 3 | More content | More content |
-
-</center>
-
-## TeX Support
-
-$$ e^{ i \pi}+1=0 $$
+We fully support MathJax for academic and technical writing. From simple inline formulas like $E=mc^2$ to complex block equations:
 
 $$
-\bbox[5px, border:2px solid #268785]{
-    e^x=\lim_{n\to\infty} \left( 1+\frac{x}{n} \right)^n
+x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}
+$$
+
+$$
+\bbox[10px, border:2px solid #268785]{
+    \nabla \cdot \mathbf{E} = \frac{\rho}{\varepsilon_0}
 }
 $$
 
-## Picture
+### Data Presentation
 
-![TestImage](https://via.placeholder.com/150)
+| Component | Description                          | Status |
+| :-------- | :----------------------------------- | :----- |
+| Search    | Fuse.js powered full-site search     | Ready  |
+| Comments  | Utterances integration               | Ready  |
+| Analytics | Umami integration                    | Ready  |
+| Dark Mode | Automatic system preference matching | Ready  |
 
-![TestImage](https://via.placeholder.com/500)
+---
+
+## Media Showcase
+
+### Image Lightbox
+Click on any image to open it in a beautiful Fancybox lightbox.
+
+![Demo Image](./test-image.png)
+
+### Photo Rows
+Use our `photo-row` shortcode to arrange multiple images horizontally.
+
+{{< photo-row >}}
+https://img.cicada000.work/BlogImage/2022/EVA-Telephone-Pole/ep1-3.png
+https://img.cicada000.work/BlogImage/2022/EVA-Telephone-Pole/ep1-3.png
+https://img.cicada000.work/BlogImage/2022/EVA-Telephone-Pole/ep1-3.png
+{{< /photo-row >}}
+
+---
+
+# Final Thoughts
+
+Thank you for exploring this showcase. We hope Seiheki provides the perfect canvas for your words. If you have any questions or feedback, feel free to visit our Github repository.

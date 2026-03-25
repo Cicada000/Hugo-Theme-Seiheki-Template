@@ -33,3 +33,75 @@
         })
         .catch(console.error)
 </script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        function extractCodeContent(container) {
+            const tableCode = container.querySelector(
+                '.lntd:last-child pre > code, .lntd:last-child code, table tr td:last-child pre > code, table tr td:last-child code'
+            );
+
+            if (tableCode) {
+                return tableCode.innerText.trim();
+            }
+
+            const codeCandidates = Array.from(container.querySelectorAll('pre > code, code'));
+
+            if (codeCandidates.length === 0) {
+                return container.innerText.trim();
+            }
+
+            const preferredCode = [...codeCandidates].reverse().find(function(node) {
+                return node.dataset.lang || node.className.indexOf('language-') !== -1;
+            }) || codeCandidates[codeCandidates.length - 1];
+
+            const clone = preferredCode.cloneNode(true);
+
+            // Hugo 的内联行号通常没有类名，只能按不可选中的样式节点移除。
+            const lineNumbers = clone.querySelectorAll(
+                '.ln, .lnt, .ln-no, [style*="user-select:none"], [style*="-webkit-user-select:none"]'
+            );
+            lineNumbers.forEach(function(lineNumber) {
+                lineNumber.remove();
+            });
+
+            return clone.innerText.trim();
+        }
+
+        // 获取所有代码块容器
+        const codeBlocks = document.querySelectorAll('.highlight, pre:not(.highlight pre)');
+        
+        codeBlocks.forEach(function(container) {
+            if (container.closest('.code-wrapper')) return;
+
+            const wrapper = document.createElement('div');
+            wrapper.className = 'code-wrapper';
+            container.parentNode.insertBefore(wrapper, container);
+            wrapper.appendChild(container);
+
+            const copyButton = document.createElement('button');
+            copyButton.className = 'copy-code-button';
+            copyButton.innerHTML = '<span class="material-symbols-outlined">content_copy</span>';
+            wrapper.appendChild(copyButton);
+
+            copyButton.addEventListener('click', function() {
+                let codeContent = extractCodeContent(container);
+
+                // 最终清理：移除按钮自身文字并去除首尾空白
+                codeContent = codeContent.replace('content_copy', '').replace('Copied!', '').trim();
+
+                navigator.clipboard.writeText(codeContent).then(function() {
+                    const originalIcon = copyButton.innerHTML;
+                    copyButton.innerText = 'Copied!';
+                    copyButton.classList.add('copied');
+                    setTimeout(function() {
+                        copyButton.innerHTML = originalIcon;
+                        copyButton.classList.remove('copied');
+                    }, 2000);
+                }, function(err) {
+                    console.error('Failed to copy: ', err);
+                });
+            });
+        });
+    });
+</script>

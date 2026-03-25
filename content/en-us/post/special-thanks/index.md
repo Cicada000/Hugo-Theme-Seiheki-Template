@@ -46,7 +46,7 @@ categories = [
 
 ## Table Style
 
-&emsp;&emsp;Thank you [Nedifinita](https://nedifinita.me/) blog’s table style, I really like it!
+&emsp;&emsp;Thank you [Nedifinita](https://noxylva.org/) blog’s table style, I really like it!
 
 ## TOC Template
 

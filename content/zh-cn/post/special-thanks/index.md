@@ -46,7 +46,7 @@ categories = [
 
 ## 表格样式
 
-&emsp;&emsp;感谢[Nedifinita](https://nedifinita.me/)博客的表格样式，我非常喜欢！
+&emsp;&emsp;感谢[Nedifinita](https://noxylva.org/)博客的表格样式，我非常喜欢！
 
 ## TOC模板
 

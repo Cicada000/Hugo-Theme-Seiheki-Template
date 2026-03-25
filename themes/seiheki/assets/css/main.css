@@ -432,6 +432,50 @@ th {
 
 /*代码块样式*/
 
+/* 代码块复制按钮样式 */
+.highlight, pre, .code-wrapper {
+    position: relative !important;
+}
+
+.copy-code-button {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: var(--body-background-color);
+    border: 1px solid var(--site-title-color);
+    cursor: pointer;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--site-title-color);
+    border-radius: 4px;
+    opacity: 0.6; /* 提高默认透明度以确保可见 */
+    transition: all 0.3s ease;
+    z-index: 999; /* 极高层级确保不被遮挡 */
+}
+
+.copy-code-button:hover {
+    opacity: 1;
+    background-color: var(--link-color-hover);
+    color: var(--body-background-color);
+    border-color: transparent;
+}
+
+.copy-code-button .material-symbols-outlined {
+    font-size: 18px;
+}
+
+.copy-code-button.copied {
+    background-color: var(--link-color-hover);
+    color: var(--body-background-color);
+    border-color: transparent;
+    opacity: 1;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 4px 8px;
+}
+
 pre {
     background-color: var(--code-block-background-color);
     padding: 10px;
