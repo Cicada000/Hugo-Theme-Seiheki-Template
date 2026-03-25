@@ -1,10 +1,13 @@
-<div class="wrapper">
-    <div class="main">
-        <hr>
-        <div style="height: 10px;"></div>
-            <a href="#" id="onetext" target="_blank">Wait a Second...</a>
-            <br>
-            <p class="copyright">&copy; {{ now.Format "2006" }} {{ i18n "title" }}.</p>
-        <div style="height: 20px;"></div>
+<footer class="site-footer">
+    <div class="wrapper">
+        <div class="main{{ if and .IsPage (eq .Section "post") }} main-reading-layout{{ end }}">
+            <div class="footer-content">
+                <hr>
+                <div class="footer-stack">
+                    <a href="#" id="onetext" target="_blank">Wait a Second...</a>
+                    <p class="copyright">&copy; {{ now.Format "2006" }} {{ i18n "title" }}.</p>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
+</footer>

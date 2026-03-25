@@ -1,4 +1,7 @@
 {{ if .Site.Params.Utterances.repo }}
+    <div class="post-comments">
+        <div id="comments-root"></div>
+    </div>
     <script>
         var colorScheme;
 
@@ -10,16 +13,19 @@
     </script>
     <script>
         var themeValue = (colorScheme === 'dark') ? 'github-dark' : 'github-light';
+        var commentsRoot = document.getElementById('comments-root');
 
-        var script = document.createElement('script');
-        script.src = 'https://utteranc.es/client.js';
-        script.setAttribute('repo', '{{ .Site.Params.Utterances.repo }}');
-        script.setAttribute('issue-term', 'pathname');
-        script.setAttribute('theme', themeValue);
-        script.setAttribute('crossorigin', 'anonymous');
-        script.async = true;
+        if (commentsRoot) {
+            var script = document.createElement('script');
+            script.src = 'https://utteranc.es/client.js';
+            script.setAttribute('repo', '{{ .Site.Params.Utterances.repo }}');
+            script.setAttribute('issue-term', 'pathname');
+            script.setAttribute('theme', themeValue);
+            script.setAttribute('crossorigin', 'anonymous');
+            script.async = true;
 
-        document.body.appendChild(script);
+            commentsRoot.appendChild(script);
+        }
 
     </script>
 {{ end }}

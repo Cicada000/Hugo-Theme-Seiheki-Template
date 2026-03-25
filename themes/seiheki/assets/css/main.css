@@ -214,7 +214,8 @@ body{
 }
 
 .site-subtitle {
-    display: block;
+    display: inline-block;
+    width: fit-content;
     margin-top: 12px;
     font-weight: 700;
     font-size: 1rem;
@@ -229,6 +230,9 @@ body{
 
 .title-block {
     margin-top: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
 
 .site-nav-row {
@@ -755,11 +759,39 @@ a span {
     color: var(--link-color);
 }
 
+/* 页脚样式 */
+.site-footer {
+    width: 100%;
+}
+
+.footer-content {
+    width: 100%;
+    max-width: var(--content-max-width);
+}
+
+.footer-stack {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px 0 20px;
+}
+
+/* 评论区样式 */
+.post-comments {
+    width: 100%;
+    max-width: var(--content-max-width);
+    margin-top: 48px;
+}
+
+.post-comments .utterances {
+    max-width: 100%;
+}
+
 /* 页脚一言样式 */
 #onetext {
     font-size: 16px;
     color: var(--link-color);
-    margin-top: 20px;
 }
 
 #onetext:hover {
@@ -768,6 +800,7 @@ a span {
 
 .copyright {
     display: inline-block;
+    margin: 0;
     color: var(--site-title-color);
     transition: all 0.5s;
 }
