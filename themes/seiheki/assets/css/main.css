@@ -733,6 +733,7 @@ h6 {
 
 .toc a:hover {
     color: var(--body-background-color);
+    background-color: var(--link-color-hover);
 }
 
 .toc a.active {
@@ -740,6 +741,10 @@ h6 {
     font-size: 16px;
     font-weight: 700;
     transform: translateZ(0);
+}
+
+.toc a.active:hover {
+    color: var(--body-background-color);
 }
 
 @media screen and (max-width: 1180px) {
@@ -776,10 +781,12 @@ mark {
     padding: 0 10px;
     font-size: 16px;
     outline: none;
+    font-family: "Noto Serif SC", sans-serif;
 }
 
 .search-page {
     width: 100%;
+    font-family: "Noto Serif SC", sans-serif;
 }
 
 .search-toolbar {
@@ -810,6 +817,7 @@ mark {
     min-height: 42px;
     cursor: pointer;
     transition: all 0.3s ease;
+    font-family: "Noto Serif SC", sans-serif;
 }
 
 .search-mode-button:first-child {
