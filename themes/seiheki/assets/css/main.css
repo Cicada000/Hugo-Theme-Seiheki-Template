@@ -126,7 +126,7 @@ body {
 }
 
 .js-page-transitions body.is-page-leaving .page-shell {
-    animation: pageLeave 220ms var(--page-transition-ease) both;
+    animation: pageLeave 400ms var(--page-transition-ease) both;
     pointer-events: none;
 }
 
@@ -724,6 +724,11 @@ h6 {
     font-size: 14px;
     line-height: 1.7;
     text-decoration: none;
+    transform-origin: left center;
+    transition:
+        color 400ms ease,
+        font-size 400ms ease,
+        transform 400ms ease;
 }
 
 .toc a:hover {
@@ -732,7 +737,9 @@ h6 {
 
 .toc a.active {
     color: var(--toc-active-color);
+    font-size: 16px;
     font-weight: 700;
+    transform: translateZ(0);
 }
 
 @media screen and (max-width: 1180px) {
