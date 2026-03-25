@@ -1,4 +1,5 @@
-html::-webkit-scrollbar { /* 隐藏滚动条 */
+html::-webkit-scrollbar {
+    /* 隐藏滚动条 */
     width: 0px;
 }
 
@@ -91,7 +92,7 @@ html::-webkit-scrollbar { /* 隐藏滚动条 */
     padding: 0 var(--page-side-padding);
 }
 
-.main{
+.main {
     background-color: var(--body-background-color);
     font-family: "Noto Serif SC", sans-serif;
     width: 100%;
@@ -108,7 +109,7 @@ html::-webkit-scrollbar { /* 隐藏滚动条 */
     transition: max-width var(--layout-transition-duration) var(--layout-transition-ease);
 }
 
-body{
+body {
     background-color: var(--body-background-color);
     --duration: 1s;
     --timing: ease-in-out;
@@ -135,6 +136,7 @@ body{
         transform: translateY(18px) scale(0.996);
         filter: blur(3px);
     }
+
     100% {
         opacity: 1;
         transform: translateY(0) scale(1);
@@ -148,6 +150,7 @@ body{
         transform: translateY(0) scale(1);
         filter: blur(0);
     }
+
     100% {
         opacity: 0;
         transform: translateY(-12px) scale(0.995);
@@ -156,6 +159,7 @@ body{
 }
 
 @media (prefers-reduced-motion: reduce) {
+
     .js-page-transitions .page-shell,
     .js-page-transitions body.is-page-leaving .page-shell {
         animation: none;
@@ -193,6 +197,7 @@ body{
 /*标题样式*/
 
 .site-header {
+    position: relative;
     padding-top: 56px;
     margin-bottom: 38px;
 }
@@ -324,6 +329,10 @@ a:hover {
 }
 
 /* 定义菜单的按钮的样式 */
+.menu-toggle-input {
+    display: none;
+}
+
 .menu-button {
     display: none;
     position: absolute;
@@ -362,6 +371,10 @@ a:hover {
 /* 移动端菜单样式 */
 @media screen and (max-width: 720px) {
 
+    .site-nav-row {
+        position: static;
+    }
+
     .menu {
         display: flex;
         flex-direction: column;
@@ -373,7 +386,7 @@ a:hover {
         transition: max-height 1s ease-in-out;
     }
 
-    .menu-button:checked ~ .menu {
+    .menu-toggle-input:checked~.menu {
         max-height: 500px;
     }
 
@@ -417,12 +430,17 @@ a:hover {
     /* 显示菜单的按钮 */
     .menu-button {
         background-color: transparent;
-        display: block;
-        margin-top: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        top: 36px;
+        right: 0;
+        margin-top: 10px;
+        z-index: 3;
     }
 
     /* 当菜单的按钮被点击时，显示所有的菜单项 */
-    .menu-button:checked ~ .menu li a {
+    .menu-toggle-input:checked~.menu li a {
         opacity: 1;
         visibility: visible;
     }
@@ -440,7 +458,8 @@ a:hover {
 
 /*标签样式*/
 
-.tags , .up-time {
+.tags,
+.up-time {
     font-weight: 500;
     color: var(--tag-color);
     display: inline-block;
@@ -525,7 +544,7 @@ th {
     font-size: 24px;
 }
 
-.post-title{
+.post-title {
     display: inline-block;
     width: auto;
     height: auto;
@@ -535,19 +554,21 @@ th {
     transition: all 0.5s;
 }
 
-.post-title:hover{
+.post-title:hover {
     color: var(--body-background-color);
     background-color: var(--site-title-color-hover);
 }
 
-.post-date{
+.post-date {
     color: var(--site-title-color);
 }
 
 /*代码块样式*/
 
 /* 代码块复制按钮样式 */
-.highlight, pre, .code-wrapper {
+.highlight,
+pre,
+.code-wrapper {
     position: relative !important;
 }
 
@@ -564,9 +585,11 @@ th {
     justify-content: center;
     color: var(--site-title-color);
     border-radius: 4px;
-    opacity: 0.6; /* 提高默认透明度以确保可见 */
+    opacity: 0.6;
+    /* 提高默认透明度以确保可见 */
     transition: all 0.3s ease;
-    z-index: 999; /* 极高层级确保不被遮挡 */
+    z-index: 999;
+    /* 极高层级确保不被遮挡 */
 }
 
 .copy-code-button:hover {
@@ -596,13 +619,14 @@ pre {
     overflow-x: auto;
 }
 
-p > code {
+p>code {
     background-color: var(--code-background-color);
     border-radius: 3px;
     padding: 1px 4px;
 }
 
-pre code , code {
+pre code,
+code {
     font-family: 'Fira Code', Consolas, Monaco, monospace;
     font-size: 14px;
     font-weight: 700;
@@ -616,7 +640,8 @@ kbd {
     font-weight: 700;
 }
 
-.highlight .linenos, .highlight .code {
+.highlight .linenos,
+.highlight .code {
     padding: 0;
     border: none;
 }
@@ -625,31 +650,32 @@ kbd {
     padding-right: 0.5em;
 }
 
-.highlight table > tbody > tr > td {
-    background-color: #272823;  /* 这里需要修改 原为var(--body-background-color) */
+.highlight table>tbody>tr>td {
+    background-color: #272823;
+    /* 这里需要修改 原为var(--body-background-color) */
 }
 
-h1{
+h1 {
     font-size: 30px;
 }
 
-h2{
+h2 {
     font-size: 24px;
 }
 
-h3{
+h3 {
     font-size: 18px;
 }
 
-h4{
+h4 {
     font-size: 16px;
 }
 
-h5{
+h5 {
     font-size: 14px;
 }
 
-h6{
+h6 {
     font-size: 12px;
 }
 
@@ -735,14 +761,116 @@ mark {
 
 #search-input {
     width: 100%;
-    max-width: 800px;
-    height: 30px;
-    border-radius: 3px;
+    min-width: 0;
+    min-height: 42px;
+    border-radius: 0;
     background-color: var(--search-input-background-color);
     border: 1px solid transparent;
-    padding: 5px;
+    padding: 0 10px;
     font-size: 16px;
     outline: none;
+}
+
+.search-page {
+    width: 100%;
+}
+
+.search-toolbar {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    width: 100%;
+    align-items: stretch;
+    gap: 10px;
+}
+
+.search-mode-switch {
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid var(--table-td-border-color);
+    border-radius: 0;
+    background-color: var(--search-input-background-color);
+    overflow: hidden;
+}
+
+.search-mode-button {
+    border: none;
+    border-left: 1px solid var(--table-td-border-color);
+    background-color: transparent;
+    color: var(--tag-color);
+    font-size: 14px;
+    font-weight: 700;
+    padding: 0 16px;
+    min-height: 42px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.search-mode-button:first-child {
+    border-left: none;
+}
+
+.search-mode-button:hover {
+    color: var(--body-background-color);
+    background-color: var(--link-color-hover);
+}
+
+.search-mode-button.active {
+    color: var(--body-background-color);
+    background-color: var(--menu-link-color);
+}
+
+@media screen and (max-width: 720px) {
+    .search-toolbar {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    #search-input {
+        width: calc(100% - 18px);
+        justify-self: start;
+    }
+
+    .search-mode-switch {
+        justify-self: start;
+    }
+}
+
+.search-status {
+    margin: 22px 0 14px;
+    color: var(--tag-color);
+    font-size: 15px;
+}
+
+#search-results {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.search-result-item {
+    padding: 18px 0 20px;
+    border-top: 1px solid var(--table-td-border-color);
+}
+
+.search-result-item:first-child {
+    border-top: none;
+    padding-top: 10px;
+}
+
+.search-result-title {
+    display: inline-block;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.search-result-snippet {
+    margin: 10px 0 0;
+    color: var(--index-summary-color);
+    line-height: 1.9;
+}
+
+.search-result-snippet mark {
+    padding: 0 2px;
 }
 
 .tag-page {
@@ -819,5 +947,6 @@ a span {
 }
 
 #languageSwitcher option:checked {
-    background-color: var(--language-switcher-option-background-checked); /* 被选中的选项的背景颜色 */
+    background-color: var(--language-switcher-option-background-checked);
+    /* 被选中的选项的背景颜色 */
 }

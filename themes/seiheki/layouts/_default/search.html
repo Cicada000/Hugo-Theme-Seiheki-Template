@@ -1,6 +1,15 @@
 {{ define "main"}}
-    <input type="text" id="search-input" placeholder="Search...">
-    <ul id="search-results"></ul>
+    <div class="search-page">
+        <div class="search-toolbar">
+            <input type="text" id="search-input" placeholder="Search...">
+            <div id="search-mode-switch" class="search-mode-switch">
+                <button type="button" class="search-mode-button" data-search-mode="fuzzy"></button>
+                <button type="button" class="search-mode-button" data-search-mode="strict"></button>
+            </div>
+        </div>
+        <p id="search-status" class="search-status"></p>
+        <ul id="search-results"></ul>
+    </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -9,63 +18,389 @@
             const supportedLangs = ['zh-cn', 'en-us'];
             const currentLang = supportedLangs.find(lang => path.startsWith('/' + lang)) || defaultLang;
             const indexFile = currentLang === defaultLang ? '/index.json' : `/${currentLang}/index.json`;
-            fetch(indexFile)
-            .then(response => response.json())
-            .then(data => {
-                const options = {
-                    keys: ['title', 'content'],
-                    threshold: 0.2,
-                    tokenize: true,
-                    matchAllTokens: true,
-                    findAllMatches: true,
-                    ignoreLocation: true,
-                    includeMatches: true
+            const searchInput = document.getElementById('search-input');
+            const searchStatus = document.getElementById('search-status');
+            const searchResults = document.getElementById('search-results');
+            const searchModeSwitch = document.getElementById('search-mode-switch');
+            const searchModeButtons = Array.from(searchModeSwitch.querySelectorAll('[data-search-mode]'));
+            const i18n = currentLang === 'zh-cn'
+                ? {
+                    placeholder: '搜索文章内容...',
+                    empty: '输入关键词开始搜索。',
+                    noResults: '没有找到相关内容。',
+                    fuzzy: '模糊匹配',
+                    strict: '严格匹配',
+                    modeLabel: '搜索模式',
+                    results: function(count) { return `找到 ${count} 条结果`; }
+                }
+                : {
+                    placeholder: 'Search posts...',
+                    empty: 'Type to start searching.',
+                    noResults: 'No matching content found.',
+                    fuzzy: 'Fuzzy',
+                    strict: 'Strict',
+                    modeLabel: 'Search mode',
+                    results: function(count) { return `${count} result${count === 1 ? '' : 's'}`; }
                 };
-                const fuse = new Fuse(data, options);
-    
-                document.getElementById('search-input').addEventListener('input', function() {
-                    let results = fuse.search(this.value);
-                    let searchResults = document.getElementById('search-results');
-                    searchResults.innerHTML = '';
-                    
-                    results.forEach(result => {
-                        let item = document.createElement('li');
-                        let link = document.createElement('a');
-                        link.href = result.item.permalink;
-                        link.textContent = result.item.title;
-                        item.appendChild(link);
-    
-                        /* 搞不好不搞了
-                        // 处理匹配到的片段
-                        if (result.matches && result.matches.length) {
-                            // 只处理第一个匹配项
-                            let firstMatch = result.matches[0]; // 假定按照相关性排序
-                            if (firstMatch.key === 'content') {
-                                // 先提取HTML中的纯文本
-                                let tempDiv = document.createElement('div');
-                                tempDiv.innerHTML = result.item.content;
-                                let plainTextContent = tempDiv.textContent || tempDiv.innerText;
-    
-                                // 获取第一个匹配项的索引
-                                let [start, end] = firstMatch.indices[0];
-                                // 计算摘要的起始和结束索引
-                                let snippetStart = Math.max(start - 30, 0);
-                                let snippetEnd = Math.min(end + 30, plainTextContent.length);
-                                // 提取摘要文本
-                                let snippet = '... ' + plainTextContent.substring(snippetStart, snippetEnd) + ' ...';
-                                // 创建段落元素以显示摘要
-                                let snippetElem = document.createElement('p');
-                                snippetElem.textContent = snippet;
-                                item.appendChild(snippetElem);
-                            }
+            let searchMode = localStorage.getItem('seiheki-search-mode');
+
+            if (!['fuzzy', 'strict'].includes(searchMode)) {
+                searchMode = 'fuzzy';
+            }
+
+            function normalizeText(text) {
+                return (text || '').replace(/\s+/g, ' ').trim();
+            }
+
+            function escapeHtml(text) {
+                return (text || '')
+                    .replace(/&/g, '&amp;')
+                    .replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;')
+                    .replace(/"/g, '&quot;')
+                    .replace(/'/g, '&#39;');
+            }
+
+            function escapeRegExp(text) {
+                return text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+            }
+
+            function findExactRanges(text, query) {
+                if (!text || !query) return [];
+
+                const regex = new RegExp(escapeRegExp(query), 'gi');
+                const ranges = [];
+                let match;
+
+                while ((match = regex.exec(text)) !== null) {
+                    ranges.push({
+                        start: match.index,
+                        end: match.index + match[0].length
+                    });
+
+                    if (match.index === regex.lastIndex) {
+                        regex.lastIndex += 1;
+                    }
+                }
+
+                return ranges;
+            }
+
+            function mergeRanges(ranges, joinGap) {
+                if (!ranges.length) return [];
+
+                const sortedRanges = [...ranges]
+                    .sort(function(a, b) { return a.start - b.start; });
+                const mergedRanges = [sortedRanges[0]];
+
+                sortedRanges.slice(1).forEach(function(range) {
+                    const previousRange = mergedRanges[mergedRanges.length - 1];
+                    if (range.start <= previousRange.end + joinGap) {
+                        previousRange.end = Math.max(previousRange.end, range.end);
+                    } else {
+                        mergedRanges.push({ start: range.start, end: range.end });
+                    }
+                });
+
+                return mergedRanges;
+            }
+
+            function renderSnippet(text, highlightRanges, windows) {
+                return windows.map(function(windowRange) {
+                    let cursor = windowRange.start;
+                    let html = '';
+                    const rangesInWindow = highlightRanges.filter(function(range) {
+                        return range.end > windowRange.start && range.start < windowRange.end;
+                    });
+
+                    rangesInWindow.forEach(function(range) {
+                        const start = Math.max(range.start, windowRange.start);
+                        const end = Math.min(range.end, windowRange.end);
+
+                        if (cursor < start) {
+                            html += escapeHtml(text.slice(cursor, start));
                         }
-                        */
-    
-                        // 将列表项添加到搜索结果中
-                        searchResults.appendChild(item);
+
+                        html += '<mark>' + escapeHtml(text.slice(start, end)) + '</mark>';
+                        cursor = end;
+                    });
+
+                    if (cursor < windowRange.end) {
+                        html += escapeHtml(text.slice(cursor, windowRange.end));
+                    }
+
+                    const prefix = windowRange.start > 0 ? '... ' : '';
+                    const suffix = windowRange.end < text.length ? ' ...' : '';
+                    return prefix + html.trim() + suffix;
+                }).join(' ');
+            }
+
+            function createHighlightedPreview(text, queryTerms) {
+                if (!text) return '';
+
+                const ranges = [];
+                queryTerms.forEach(function(term) {
+                    if (!term) return;
+
+                    const regex = new RegExp(escapeRegExp(term), 'gi');
+                    let match;
+
+                    while ((match = regex.exec(text)) !== null) {
+                        ranges.push({
+                            start: match.index,
+                            end: match.index + match[0].length
+                        });
+
+                        if (match.index === regex.lastIndex) {
+                            regex.lastIndex += 1;
+                        }
+                    }
+                });
+
+                if (!ranges.length) {
+                    return escapeHtml(text);
+                }
+
+                return renderSnippet(text, mergeRanges(ranges, 0), [{ start: 0, end: text.length }]);
+            }
+
+            function buildSnippetWindow(text, highlightRanges) {
+                if (!text || !highlightRanges.length) return '';
+
+                const firstRange = highlightRanges[0];
+                const windowRange = {
+                    start: Math.max(0, firstRange.start - 42),
+                    end: Math.min(text.length, firstRange.end + 42)
+                };
+
+                return renderSnippet(text, highlightRanges, [windowRange]);
+            }
+
+            function buildFuzzySnippet(result, queryTerms) {
+                const content = normalizeText(result.item.content);
+                const summary = normalizeText(result.item.summary);
+                const contentMatch = (result.matches || []).find(function(match) {
+                    return match.key === 'content' && match.indices && match.indices.length;
+                });
+                const summaryMatch = (result.matches || []).find(function(match) {
+                    return match.key === 'summary' && match.indices && match.indices.length;
+                });
+
+                if (contentMatch && content) {
+                    const highlightRanges = mergeRanges(contentMatch.indices.map(function(indexRange) {
+                        return {
+                            start: indexRange[0],
+                            end: indexRange[1] + 1
+                        };
+                    }), 2);
+
+                    return buildSnippetWindow(content, highlightRanges);
+                }
+
+                if (summaryMatch && summary) {
+                    const highlightRanges = mergeRanges(summaryMatch.indices.map(function(indexRange) {
+                        return {
+                            start: indexRange[0],
+                            end: indexRange[1] + 1
+                        };
+                    }), 2);
+
+                    return buildSnippetWindow(summary, highlightRanges);
+                }
+
+                const fallbackText = summary || content.slice(0, 160);
+                const limitedText = fallbackText.length > 180
+                    ? fallbackText.slice(0, 180).trim() + ' ...'
+                    : fallbackText;
+
+                return createHighlightedPreview(limitedText, queryTerms);
+            }
+
+            function buildStrictSnippet(result, query) {
+                const summary = normalizeText(result.item.summary);
+                const content = normalizeText(result.item.content);
+                const contentRanges = findExactRanges(content, query);
+                const summaryRanges = findExactRanges(summary, query);
+                const snippetText = contentRanges.length ? content : summary;
+                const snippetRanges = contentRanges.length ? contentRanges : summaryRanges;
+
+                if (snippetRanges.length && snippetText) {
+                    return buildSnippetWindow(snippetText, snippetRanges);
+                }
+
+                const fallbackText = summary || content.slice(0, 160);
+                const limitedText = fallbackText.length > 180
+                    ? fallbackText.slice(0, 180).trim() + ' ...'
+                    : fallbackText;
+
+                return createHighlightedPreview(limitedText, [query]);
+            }
+
+            function buildSnippet(result, queryTerms, query) {
+                if (searchMode === 'strict') {
+                    return buildStrictSnippet(result, query);
+                }
+
+                return buildFuzzySnippet(result, queryTerms);
+            }
+
+            function searchStrict(data, query) {
+                return data.map(function(item) {
+                    const titleRanges = findExactRanges(item.title, query);
+                    const summaryRanges = findExactRanges(item.summary, query);
+                    const contentRanges = findExactRanges(item.content, query);
+
+                    if (!titleRanges.length && !summaryRanges.length && !contentRanges.length) {
+                        return null;
+                    }
+
+                    const firstRange = titleRanges[0] || summaryRanges[0] || contentRanges[0];
+                    const fieldWeight = titleRanges.length ? 0 : summaryRanges.length ? 1 : 2;
+
+                    return {
+                        item: item,
+                        strictScore: fieldWeight * 100000 + firstRange.start
+                    };
+                }).filter(Boolean).sort(function(a, b) {
+                    return a.strictScore - b.strictScore;
+                });
+            }
+
+            function dedupeResults(results) {
+                const seenPermalinks = new Set();
+
+                return results.filter(function(result) {
+                    const permalink = result && result.item ? result.item.permalink : '';
+                    if (!permalink || seenPermalinks.has(permalink)) {
+                        return false;
+                    }
+
+                    seenPermalinks.add(permalink);
+                    return true;
+                });
+            }
+
+            function runSearch(data, fuse, query) {
+                const trimmedQuery = normalizeText(query);
+
+                if (!trimmedQuery) {
+                    return [];
+                }
+
+                if (searchMode === 'strict') {
+                    return dedupeResults(searchStrict(data, trimmedQuery));
+                }
+
+                return dedupeResults(fuse.search(trimmedQuery));
+            }
+
+            function updateSearchModeUI() {
+                searchModeSwitch.setAttribute('aria-label', i18n.modeLabel);
+
+                searchModeButtons.forEach(function(button) {
+                    const isActive = button.dataset.searchMode === searchMode;
+                    button.textContent = button.dataset.searchMode === 'fuzzy' ? i18n.fuzzy : i18n.strict;
+                    button.classList.toggle('active', isActive);
+                    button.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+                });
+            }
+
+            function renderResults(results, query) {
+                const trimmedQuery = normalizeText(query);
+                const queryTerms = trimmedQuery.split(/\s+/).filter(Boolean);
+
+                searchResults.innerHTML = '';
+
+                if (!trimmedQuery) {
+                    searchStatus.textContent = i18n.empty;
+                    return;
+                }
+
+                if (!results.length) {
+                    searchStatus.textContent = i18n.noResults;
+                    return;
+                }
+
+                searchStatus.textContent = i18n.results(results.length);
+
+                results.forEach(function(result) {
+                    const item = document.createElement('li');
+                    item.className = 'search-result-item';
+
+                    const link = document.createElement('a');
+                    link.className = 'search-result-title';
+                    link.href = result.item.permalink;
+                    link.textContent = result.item.title;
+
+                    const snippet = document.createElement('p');
+                    snippet.className = 'search-result-snippet';
+                    snippet.innerHTML = buildSnippet(result, queryTerms, trimmedQuery);
+
+                    item.appendChild(link);
+                    item.appendChild(snippet);
+                    searchResults.appendChild(item);
+                });
+            }
+
+            searchInput.placeholder = i18n.placeholder;
+            searchStatus.textContent = i18n.empty;
+            updateSearchModeUI();
+
+            fetch(indexFile)
+                .then(response => response.json())
+                .then(data => {
+                    const seenPermalinks = new Set();
+                    const normalizedData = data.map(function(item) {
+                        return {
+                            title: normalizeText(item.title),
+                            permalink: item.permalink,
+                            summary: normalizeText(item.summary),
+                            content: normalizeText(item.content)
+                        };
+                    }).filter(function(item) {
+                        if (!item.permalink || seenPermalinks.has(item.permalink)) {
+                            return false;
+                        }
+
+                        seenPermalinks.add(item.permalink);
+                        return true;
+                    });
+
+                    const options = {
+                        keys: [
+                            { name: 'title', weight: 0.45 },
+                            { name: 'summary', weight: 0.2 },
+                            { name: 'content', weight: 0.35 }
+                        ],
+                        threshold: 0.3,
+                        ignoreLocation: true,
+                        findAllMatches: true,
+                        includeMatches: true
+                    };
+                    const fuse = new Fuse(normalizedData, options);
+
+                    function refreshResults() {
+                        const query = searchInput.value;
+                        const results = runSearch(normalizedData, fuse, query);
+                        renderResults(results, query);
+                    }
+
+                    searchInput.addEventListener('input', function() {
+                        refreshResults();
+                    });
+
+                    searchModeButtons.forEach(function(button) {
+                        button.addEventListener('click', function() {
+                            const nextMode = button.dataset.searchMode;
+                            if (nextMode === searchMode) return;
+
+                            searchMode = nextMode;
+                            localStorage.setItem('seiheki-search-mode', searchMode);
+                            updateSearchModeUI();
+                            refreshResults();
+                        });
                     });
                 });
-            });
         });
     </script>    
 {{ end }}
