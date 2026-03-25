@@ -24,6 +24,48 @@
 </script>
 
 <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+        if (prefersReducedMotion.matches) {
+            return;
+        }
+
+        window.addEventListener('pageshow', function() {
+            document.body.classList.remove('is-page-leaving');
+        });
+
+        document.addEventListener('click', function(event) {
+            const link = event.target.closest('a');
+
+            if (!link || event.defaultPrevented) return;
+            if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+            if (link.target && link.target !== '_self') return;
+            if (link.hasAttribute('download') || link.dataset.noTransition !== undefined) return;
+
+            const href = link.getAttribute('href');
+            if (!href || href.startsWith('mailto:') || href.startsWith('tel:') || href.startsWith('javascript:')) return;
+
+            const targetUrl = new URL(link.href, window.location.href);
+            const currentUrl = new URL(window.location.href);
+            const isHashOnlyNavigation = targetUrl.pathname === currentUrl.pathname
+                && targetUrl.search === currentUrl.search
+                && targetUrl.hash !== currentUrl.hash;
+
+            if (targetUrl.origin !== currentUrl.origin || isHashOnlyNavigation) return;
+            if (targetUrl.href === currentUrl.href) return;
+
+            event.preventDefault();
+            document.body.classList.add('is-page-leaving');
+
+            window.setTimeout(function() {
+                window.location.href = targetUrl.href;
+            }, 220);
+        });
+    });
+</script>
+
+<script>
     fetch('https://onetext.cicada000.work')
         .then(response => response.json())
         .then(data => {

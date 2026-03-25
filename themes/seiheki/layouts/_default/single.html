@@ -1,6 +1,7 @@
 {{ define "main"}}
-    <body>
+    {{ $headers := findRE "<h[1-2].*?>(.|\n])+?</h[1-2]>" .Content }}
         <div id="post" class="post">
+            <div class="post-layout{{ if ge (len $headers) 1 }} has-toc{{ end }}">
             <article>
                 <h1 class="post-title" onclick="javascript:location.reload();">{{ .Title }}</h1>
                 <br>
@@ -17,10 +18,10 @@
                 <i class="ri-eye-line" style="color: var(--tag-color);"></i>
                 <span class="more-meta"> {{ .ReadingTime  }} {{ i18n "reading-time" }}</span>
                 <br>
-                {{- partial "toc.html" . }}
                 {{.Content}}
             </article>
+            {{- partial "toc.html" . }}
+            </div>
         </div>
         {{- partial "comments.html" . }}
-    </body>
 {{ end }}

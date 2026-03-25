@@ -6,7 +6,6 @@
 {{ $renum := (cond (eq $h1_n 0) "2" "[1-2]") }}
 <div class="toc">
     <div class="page-header"><strong>{{ .Title }}</strong></div>
-    <br>
     <div id="page-scrollspy" class="toc-nav">
         {{ range $headers }}
         {{ $header := . }}

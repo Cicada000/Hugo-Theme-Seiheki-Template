@@ -28,6 +28,22 @@ html::-webkit-scrollbar { /* 隐藏滚动条 */
     --language-switcher-option-background: #f8f8f8;
     --language-switcher-option-background-checked: #e9e9e9;
     --language-switcher-option-color: #333;
+    --page-max-width: 1180px;
+    --content-max-width: 760px;
+    --post-layout-max-width: 1040px;
+    --toc-width: 190px;
+    --toc-gap: clamp(56px, 6vw, 96px);
+    --page-side-padding: clamp(24px, 4vw, 56px);
+    --page-transition-duration: 320ms;
+    --page-transition-ease: cubic-bezier(0.22, 1, 0.36, 1);
+    --layout-transition-duration: 420ms;
+    --layout-transition-ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+    --reading-layout-max-width: var(--post-layout-max-width);
+    --toc-track-width: var(--toc-width);
+    --toc-current-gap: var(--toc-gap);
+    --toc-opacity: 1;
+    --toc-transform: translateX(0);
+    --toc-pointer-events: auto;
 }
 
 /*暗色模式*/
@@ -56,30 +72,40 @@ html::-webkit-scrollbar { /* 隐藏滚动条 */
 /*长条屏幕不显示TOC*/
 
 @media screen and (max-aspect-ratio: 1.4) {
-    .toc {
-        display: none;
+    :root {
+        --reading-layout-max-width: var(--content-max-width);
+        --toc-track-width: 0px;
+        --toc-current-gap: 0px;
+        --toc-opacity: 0;
+        --toc-transform: translateX(24px);
+        --toc-pointer-events: none;
     }
 }
 
 /*整体布局*/
 .wrapper {
-    display: flex;
-    justify-content: space-between;
+    width: 100%;
+    max-width: var(--page-max-width);
+    margin: 0 auto;
+    box-sizing: border-box;
+    padding: 0 var(--page-side-padding);
 }
 
 .main{
     background-color: var(--body-background-color);
     font-family: "Noto Serif SC", sans-serif;
-    width: 60%;
-    max-width: 1000px;
+    width: 100%;
+    max-width: var(--content-max-width);
     margin: auto;
     font-weight: 500;
     --duration: 1s;
     --timing: ease-in-out;
     transition: background-color var(--duration);
-    animation: fadeInAnimation ease 1s;
-    animation-iteration-count: 1;
-    animation-fill-mode: forwards;
+}
+
+.main.main-reading-layout {
+    max-width: var(--reading-layout-max-width);
+    transition: max-width var(--layout-transition-duration) var(--layout-transition-ease);
 }
 
 body{
@@ -87,36 +113,96 @@ body{
     --duration: 1s;
     --timing: ease-in-out;
     transition: background-color var(--duration);
-    animation: fadeInAnimation ease 1s;
-    animation-iteration-count: 1; 
-    animation-fill-mode: forwards;
 }
 
-@keyframes fadeInAnimation { 
-    0% { 
+.page-shell {
+    transform-origin: top center;
+    will-change: opacity, transform, filter;
+}
+
+.js-page-transitions .page-shell {
+    animation: pageEnter var(--page-transition-duration) var(--page-transition-ease) both;
+}
+
+.js-page-transitions body.is-page-leaving .page-shell {
+    animation: pageLeave 220ms var(--page-transition-ease) both;
+    pointer-events: none;
+}
+
+@keyframes pageEnter {
+    0% {
         opacity: 0;
-    } 
-    100% { 
-        opacity: 1; 
+        transform: translateY(18px) scale(0.996);
+        filter: blur(3px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+    }
+}
+
+@keyframes pageLeave {
+    0% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-12px) scale(0.995);
+        filter: blur(2px);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .js-page-transitions .page-shell,
+    .js-page-transitions body.is-page-leaving .page-shell {
+        animation: none;
+        filter: none;
+        transform: none;
+    }
+
+    .main.main-reading-layout {
+        transition: none;
+    }
+
+    .post-layout.has-toc,
+    .toc {
+        transition: none;
     }
 }
 
 /* 改善移动端浏览体验 */
 
 @media screen and (max-aspect-ratio: 0.7) {
+    .site-header {
+        padding-top: 44px;
+        margin-bottom: 32px;
+    }
+
+    .site-nav-row {
+        margin-top: 22px;
+    }
+
     .main {
-        width: 85%;
+        width: 100%;
     }
 }
 
 /*标题样式*/
 
+.site-header {
+    padding-top: 56px;
+    margin-bottom: 38px;
+}
+
 .site-title {
     display: inline-block;
-    width: auto;
-    height: auto;
+    width: fit-content;
     font-weight: 700;
     font-size: 2rem;
+    line-height: 1.08;
     color: var(--site-title-color);
     transition: all 0.5s;
     cursor: pointer;
@@ -128,8 +214,8 @@ body{
 }
 
 .site-subtitle {
-    display: inline-block;
-    margin-top: 10px;
+    display: block;
+    margin-top: 12px;
     font-weight: 700;
     font-size: 1rem;
     color: var(--site-title-color);
@@ -142,7 +228,12 @@ body{
 }
 
 .title-block {
-    margin-top: 5%;
+    margin-top: 0;
+}
+
+.site-nav-row {
+    position: relative;
+    margin-top: 28px;
 }
 
 /* 标签样式 */
@@ -407,6 +498,25 @@ th {
     margin-top: -10px;
 }
 
+.post-layout {
+    width: 100%;
+}
+
+.post-layout article {
+    width: 100%;
+    max-width: var(--content-max-width);
+}
+
+.post-layout.has-toc {
+    display: grid;
+    grid-template-columns: minmax(0, var(--content-max-width)) minmax(0, var(--toc-track-width));
+    column-gap: var(--toc-current-gap);
+    align-items: start;
+    transition:
+        grid-template-columns var(--layout-transition-duration) var(--layout-transition-ease),
+        column-gap var(--layout-transition-duration) var(--layout-transition-ease);
+}
+
 .post-link {
     font-size: 24px;
 }
@@ -541,17 +651,31 @@ h6{
 
 /*TOC样式*/
 .toc {
-    position: fixed;
-    top: 20%;
-    right: 1.5%;
-    width: 200px;
-    padding: 10px;
-    line-height: 20px;
+    position: sticky;
+    top: clamp(96px, 16vh, 156px);
+    width: 100%;
+    padding: 0;
+    line-height: 1.7;
+    align-self: start;
+    overflow: hidden;
+    opacity: var(--toc-opacity);
+    transform: var(--toc-transform);
+    pointer-events: var(--toc-pointer-events);
+    transition:
+        opacity 280ms ease,
+        transform var(--layout-transition-duration) var(--layout-transition-ease);
 }
 
 .toc h2 {
     font-size: 18px;
     text-align: center;
+}
+
+.toc .page-header {
+    color: var(--site-title-color);
+    font-size: 15px;
+    line-height: 1.4;
+    margin-bottom: 10px;
 }
 
 .toc ul {
@@ -566,7 +690,9 @@ h6{
 
 .toc a {
     color: var(--toc-color);
-    font-size: smaller;
+    display: inline-block;
+    font-size: 14px;
+    line-height: 1.7;
     text-decoration: none;
 }
 
@@ -576,8 +702,18 @@ h6{
 
 .toc a.active {
     color: var(--toc-active-color);
-    font-size: medium;
     font-weight: 700;
+}
+
+@media screen and (max-width: 1180px) {
+    :root {
+        --reading-layout-max-width: var(--content-max-width);
+        --toc-track-width: 0px;
+        --toc-current-gap: 0px;
+        --toc-opacity: 0;
+        --toc-transform: translateX(24px);
+        --toc-pointer-events: none;
+    }
 }
 
 img {

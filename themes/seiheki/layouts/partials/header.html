@@ -1,68 +1,61 @@
-<div class="title-block">
-    <div class="site-title" onclick="goToHomepage()">{{ i18n "title" }}</div>
-    <br>
-    <div class="site-subtitle">{{ i18n "subtitle" }}</div>
-    <script>
-        function goToHomepage() {
-        const defaultLang = '{{ .Site.Params.defaultContentLanguage }}';
-        const currentLang = '{{ .Site.Language.Lang }}';
-        const homepageUrl = currentLang === defaultLang ? '{{ .Site.BaseURL }}' : '{{ .Site.BaseURL }}' + '/' + currentLang + '/';
-        window.location.href = homepageUrl;
-        }
-    </script>      
-</div>
-<br>
-<div>
-    <input type="checkbox" id="menu-button" class="menu-button" />
-    <ul class="menu">
-        <li>
-            {{ range.Site.Menus.main }}
-            <a href="{{ .URL | safeURL }}">{{ .Name }}</a>
-            {{ end }}
-            <a class="select" id="languageSelectBtn">
-                <i class="ri-translate-2"></i>
-                <span id="languageDisplay"></span>
-                <select id="languageSwitcher" class="lang_select">
-                    <option value="zh-cn">中文</option>
-                    <option value="en-us">English</option>
-                </select>
-            </a>
-        </li>
-    </ul>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            let path = window.location.pathname;
-            const defaultLang = 'zh-cn';
-            const supportedLangs = ['zh-cn', 'en-us'];
-            const currentLang = supportedLangs.find(lang => path.startsWith('/' + lang)) || defaultLang;
-            
-            const switcher = document.getElementById('languageSwitcher');
-            const display = document.getElementById('languageDisplay');
-            
-            if (switcher && display) {
-                switcher.value = currentLang;
-                display.innerText = switcher.options[switcher.selectedIndex].text;
+<header class="site-header">
+    <div class="title-block">
+        <a class="site-title" href="{{ "/" | relLangURL }}">{{ i18n "title" }}</a>
+        <div class="site-subtitle">{{ i18n "subtitle" }}</div>
+    </div>
 
-                switcher.addEventListener('change', function() {
-                    display.innerText = this.options[this.selectedIndex].text;
-                    switchLanguage(this.value);
-                });
+    <div class="site-nav-row">
+        <input type="checkbox" id="menu-button" class="menu-button" />
+        <ul class="menu">
+            <li>
+                {{ range.Site.Menus.main }}
+                <a href="{{ .URL | safeURL }}">{{ .Name }}</a>
+                {{ end }}
+                <a class="select" id="languageSelectBtn">
+                    <i class="ri-translate-2"></i>
+                    <span id="languageDisplay"></span>
+                    <select id="languageSwitcher" class="lang_select">
+                        <option value="zh-cn">中文</option>
+                        <option value="en-us">English</option>
+                    </select>
+                </a>
+            </li>
+        </ul>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                let path = window.location.pathname;
+                const defaultLang = 'zh-cn';
+                const supportedLangs = ['zh-cn', 'en-us'];
+                const currentLang = supportedLangs.find(lang => path.startsWith('/' + lang)) || defaultLang;
+                
+                const switcher = document.getElementById('languageSwitcher');
+                const display = document.getElementById('languageDisplay');
+                
+                if (switcher && display) {
+                    switcher.value = currentLang;
+                    display.innerText = switcher.options[switcher.selectedIndex].text;
+
+                    switcher.addEventListener('change', function() {
+                        display.innerText = this.options[this.selectedIndex].text;
+                        switchLanguage(this.value);
+                    });
+                }
+            });
+            
+            function switchLanguage(newLang) {
+                let path = window.location.pathname;
+                const defaultLang = 'zh-cn';
+                const supportedLangs = ['zh-cn', 'en-us'];
+                const currentLang = supportedLangs.find(lang => path.startsWith('/' + lang));
+            
+                if (currentLang) {
+                    path = newLang === defaultLang ? path.replace('/' + currentLang, '') : path.replace('/' + currentLang, '/' + newLang);
+                } else if (newLang !== defaultLang) {
+                    path = '/' + newLang + path;
+                }
+                window.location.href = path;
             }
-        });
-        
-        function switchLanguage(newLang) {
-            let path = window.location.pathname;
-            const defaultLang = 'zh-cn';
-            const supportedLangs = ['zh-cn', 'en-us'];
-            const currentLang = supportedLangs.find(lang => path.startsWith('/' + lang));
-        
-            if (currentLang) {
-                path = newLang === defaultLang ? path.replace('/' + currentLang, '') : path.replace('/' + currentLang, '/' + newLang);
-            } else if (newLang !== defaultLang) {
-                path = '/' + newLang + path;
-            }
-            window.location.href = path;
-        }
-    </script>
-    <label for="menu-button" class="menu-button">☰</label>
-</div>
+        </script>
+        <label for="menu-button" class="menu-button">☰</label>
+    </div>
+</header>

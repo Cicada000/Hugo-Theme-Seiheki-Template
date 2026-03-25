@@ -8,15 +8,16 @@
     {{- partial "head.html" . -}}
     {{- partial "js.html" . -}}
     <body>
-        <div class="wrapper">
-            <div class="main">
-                {{- partial "header.html" . -}}
-                <br>
-                <div>
-                    {{- block "main" . }}{{- end }}
+        <div class="page-shell">
+            <div class="wrapper">
+                <div class="main{{ if and .IsPage (eq .Section "post") }} main-reading-layout{{ end }}">
+                    {{- partial "header.html" . -}}
+                    <div>
+                        {{- block "main" . }}{{- end }}
+                    </div>
                 </div>
             </div>
+            {{- partial "footer.html" . -}}
         </div>
-        {{- partial "footer.html" . -}}
     </body>
 </html>
